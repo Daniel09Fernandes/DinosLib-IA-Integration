@@ -1,0 +1,772 @@
+Alô, estou me ouvindo bem?
+Choc!
+Bom, então vamos lá pessoal, eu vou estar falando sobre Cloud com um Delphi, né?
+Descomplicando, mostrando mais a parte prática da Cloud.
+Deixa eu soltar aqui pro editor.
+Certo, o que que eu vou estar abordando aqui hoje, né?
+A gente vai estar vendo os monolitos, os microserviços, o que são as fases, as funções, as services, algumas arquiteturas.
+O que que é o Google Cloud Platform, o GCP?
+Vamos estar falando bem sobre o Cinto, sobre Docker.
+Aí vamos entrar um pouco na parte prática.
+Tem os contatos ali no final e vou abrir o espaço de dúvidas também no final.
+Certo, pra quem não me conhece, eu sou o Daniel Fernandes.
+Sou do Ovidor Senor aqui da AQUA.
+Tenho mais de sete anos de experiência com o Delphi.
+Sou graduado em gestão da TI pela FATEC de Braga São Paulo Lista.
+Sou pós-graduado também em geria de software pela estácio.
+Sou o criador do Dinos Devs no Instagram.
+Fiz um componente que me levou pra conference no ano passado, que é o LibreOffice pra Delphi, que é o Dinos Offices.
+E fui palestrante na DelphiCon de 2023, na conference do ano passado e desse ano também.
+Certo, então vamos começar.
+O que são os monolitos?
+O monolito é uma arquitetura de software, onde todas as funcionalidades estão no local só.
+Então aqui na representação do monolito, que a gente tem forma de pagamento, pedido, cadastro,
+tudo numa única instância e essa instância, ela comunica com o único banco de dados.
+E a interface de usuário consome essa instância do monolito.
+Há alguns casos que a extensa do usuário está até dentro do monolito também.
+E quais são as vantagens de se utilizar monolito?
+É a simplicidade inicial na arquitetura.
+Ele é bom pra criar MVPs, porque é bem fácil no começo do desenvolvimento.
+A coisão da equipe de Devs, porque só utiliza uma única linguagem.
+É simples pra fazer deploy na produção, porque ao atualizar um pedido,
+você vai atualizar toda a instância dele.
+Então você não tem que se preocupar com diversos serviços espalhados.
+E é fácil pra debugar, porque toda regra de negócio está em um único local.
+Tem até uma referência aqui do Martin Fowler, que ele fala pra se usar primeiro o monolito,
+o monolito de first.
+E nessa abordagem aqui que fala você para começar com o monolito.
+Então há diversas discussões sobre...
+Eu achei bem interessante o esporte dele.
+E quais são os desafios dos monolitos?
+Tudo está em um único local.
+Então isso tem uma alta dependência,
+que você não consegue mexer em uma única parte de seu software
+sem afetar as demais camadas.
+A alta dependência demora para um novo Devs habituar.
+Então para aprender toda a regra de negócio,
+você tem que entender o sistema como um todo,
+uma boa parte dele para conseguir se habituar ao sistema.
+As problemas de uma parte do software afeta ele como um todo.
+Se você tem que atualizar um label ali no caixa,
+você vai ter que atualizar todo o seu sistema,
+só por conta de um leigo errado.
+Abaixa a escalabilidade, justamente por isso,
+você não consegue escalar também para ser reaproveitado.
+Basos de dados normalmente são gigantes,
+e utiliza-se uma única tecnologia.
+E os microserviços?
+Os microserviços veem entre aspas para resolver o problema do monolito.
+Não estou aqui para definir monolito nem microserviços,
+só colocando as abordagens aqui.
+O microserviço também é um desenho de arquitetura de software,
+onde são definidos conjuntos pequenos de serviços independentes,
+cada um executa uma única funcionalidade específica.
+E cada serviço é alpergado entre uma entidade.
+Então aqui na representatividade dele,
+a gente pegou aquele desenho do monolito
+e passou ele para microserviços.
+Então cada um ganha sua instância.
+Aqui temos as vendas, os cadastros, os pedidos,
+e cada monolito conversa agora com o seu próprio banco de dados.
+Cada microserviço comunica-se com o seu próprio banco de dados.
+E quais as vantagens?
+Quando utilizarem os monolitos,
+aqui tem uma outra representatividade dele.
+É uma aplicação grande e complexa,
+que precisa ser altamente escalada e dimensionada,
+quando a aplicação possui muitos domínios e subdomínios,
+e quando a necessidade de integração e implementação continua.
+A gente vai ver um pouco mais a fundo esses tópicos também.
+Aqui é um desenho de como a estrutura de um microserviço.
+E aqui tem uma frase que eu achei bem legal,
+que é vincular dos microserviços.
+Não use uma basuca para matar uma formiga.
+Então tem que analisar muito bem essa arquitetura
+se vale a pena para o seu projeto.
+E quais são as características do microserviço?
+Dividir as tarefas de formas independentes
+no serviço deve implementar apenas uma função,
+a troca de serviço é feita de maneira ágil,
+a comunicação pelos microserviços é feita via a page,
+é construída através de pequenas responsabilidades,
+tem características de ter depois automatizados,
+isso depende mais do seu DevOps.
+E pode-se usar várias linguagens diferentes.
+Aqui tem uma representação também.
+Aqui é o que vamos construir.
+É um cliente, uma API Gateway,
+um orquestrador de containers, o container,
+o orquestrador vai ser o Google ArchPact,
+o container é o Docker,
+e aqui mostrando a possibilidade de utilizar diversas linguagens,
+tipo Java, Quart, o Google,
+e a comunicação com os bancos de dados.
+No caso a gente vai utilizando o NoSQL,
+ou utilizando uma Firebase.
+E as vantagens de se utilizar um microserviço?
+Isso. A escalabilidade é eficiente,
+se conseguir escalar melhor essa software,
+isso tem facilidade na manutenção.
+Isso aqui é um ponto meio divergente também.
+A tecnologia é diversificada,
+essa facilidade na manutenção
+é no sentido de você ter códigos menores para analisar.
+Ele é resiliente e tolerante à falha,
+então se você se preocupar com os acuplamentos,
+o microserviço não vai parar o outro,
+e no movimento em paralelo você consegue quebrar
+o seu microserviço em vários microserviços,
+então você tem a possibilidade de granularizar bem o seu software,
+e a facilidade de escalabilidade horizontal,
+que é isso de granularizar o software.
+E os desafios?
+A complexidade é devido do tamanho da arquitetura,
+testes de refatoração,
+esse ponto aqui e você tem input e você tem output,
+e você tem pequenas séries de negócios no microserviço,
+porém para você encontrar onde pode estar o problema,
+é um pouco mais demorado.
+O aumento de custo para resolver bugs,
+o aumento de custo no sentido do tempo que o desenvolvedor
+vai levar para encontrar onde dá o problema,
+pode ser maior.
+A latência, a comunicação é feita sempre via rede HTTP,
+no caso o Google oferece o viciPi,
+que é um consensus uma rede local dentro da cloud,
+essa rede local você consegue colocar seus fases para se comunicarem,
+então isso foi dos bastantes,
+e a latência mais ainda assim estamos tratando de HTTP,
+aquisições de HTTP,
+então por isso uma desvantagem.
+O gerenciamento de dados ao longo do prazo,
+você vai ter vários bancos e em algum determinado momento
+isso pode ser complexo de gerenciar,
+e nem todos os aplicativos são grandes,
+o suficiente para ser divididos em microserviços,
+isso aqui vale muito levar em contas.
+Na hora de escolher essa aplicação.
+E as boas práticas do microserviço?
+Cada serviço é uma arquitetura de microserviço,
+possui o seu próprio bug de dados na sua arquitetura,
+ou utiliza de preferência a comunicação acíncrona,
+a comunicação dos microserviços deve ser realizada
+de exposição de APIs,
+de APIs REST,
+que deve se evitar o acoplamento,
+a pay gateway,
+ela deve ser a centralização das autenticações,
+rotas e balanceamentos de cargas,
+logs, as limitações,
+tudo deve acontecer dentro dela,
+ela é como se um swagger,
+o melhor ela é um swagger,
+e evitar falhas em cascatas,
+você evitando os apoclamentos do microserviço,
+você não tendo dependências,
+ou mínimas dependências de um microserviço para o outro,
+você vai conseguir evitar falhas em cascatas,
+então um microserviço não vai parar o outro
+por deixar que o curso está falhando em algum momento.
+E como que migra um monolito para um microserviço?
+Primeiro, você extrai uma funcionalidade do seu monolito,
+passe ele para o microserviço,
+e você faz os testes,
+você evita refaturar tudo de uma vez,
+você deve primeiro pensar em desapoplar o serviço do monolito,
+as organizações na hora de passagem do monolito para o microserviço
+deve sempre pensar nas regras de negócio,
+e não necessariamente na tecnologia,
+nesse momento,
+e ao migrar gradualmente os serviços,
+pode-se utilizar um patrón chamado Tierra Database,
+que você pega vários microserviços,
+que você foi passando,
+e reaproveita a base de dados,
+e depois você vem desapoplando as bases de dados,
+então compartilhar a base de dados entre os microserviços é algo temporário,
+e o microserviço exige muita automação,
+então deve-se pensar bastante,
+não devolve-se nesse momento para fazer os bílgues,
+criar as automatizações, as pipeline,
+e o que eu faço?
+Não dá para trabalhar com cloud microserviços e sem falar de faz,
+faz um serviço de back-end, um servidor,
+que não é um servidor,
+vamos dizer ali, um serviço,
+que vai ficar escutando,
+e toda vez que chegar uma requisição HTTP,
+ele vai expor esse serviço,
+disparar um segundo o serviço,
+e dar um retorno para a gente, e desligar,
+e quais as vantagens de utilizar esse formato,
+ou função, como serviço?
+Você tem melhoria na idosa de desenvolvimento,
+porque você não precisa se preocupar com a infraestrutura,
+ela é toda gerenciada pelo produtor de cloud,
+mas pela habilidade embutida,
+então você também não precisa se preocupar com o tráfico,
+com a indigência, isso também vai ser gerenciado pela cloud,
+e a eficiência de custo, porque você não paga um servidor,
+você não tem um servidor lá todo o tempo ligado,
+uma máquina virtual,
+você só vai pagar quando a requisição foi disparada,
+levantou a sua função,
+ela executou seu microserviço,
+te deu um retorno e desligou,
+a partir desse momento já não é cobrado mais custo,
+é um taxímetro ali.
+E quais os desafios do FAS?
+Você tem menor controle do sistema,
+porque você não tem acesso direto à infraestrutura,
+então na hora de entender você pode ter uma certa complexidade,
+e é mais complexo para a testa,
+porque na hora de testar você vai ter que utilizar o ambiente local
+e você vai ter que tentar reproduzir o mais real possível
+o ambiente da cloud na sua máquina de testes,
+e o service, o conceito dele.
+O conceito do service é exatamente isso da área da FAS,
+o service são implementados em contêneres
+que são iniciados sobre demanda,
+então a FAS é um service,
+o service seria mais um conceito e o FAS seria algo mais palpável.
+E aqui uma representação das arquiteturas,
+aqui eu trouxe o FAS e o service só para comparar
+que aqui é um cloud se pagando funções,
+que é a mesma representação do service que é uma cloud se pagando funções.
+Aqui é o que vamos construir, que eu já expliquei,
+e aqui é como funciona o GCP para a gente trabalhar com as FAS.
+A gente vai ter o cloud build,
+que vai gerar o artifact que vai ser o nosso orquestrador de contêneres,
+que vai guardar nossos dolares,
+e a cloud run é o nosso FAS,
+é o que vai ser disparado, que vai chamar os microservices.
+E o que é o GCP?
+O que é o Google Cloud?
+O cloud nada mais é do que recursos físicos e virtuais
+espalhados por todos os cantos do mundo,
+e o Google Cloud Platform, que é o GCP,
+ele é um provedor de recursos de computação em Google,
+então ele é uma suíte de várias soluções,
+a gente não vai conseguir ver nenhum por cento do que ele fornece,
+acredito que para ver isso somente em uma certificação,
+mas vamos utilizar aqui para trabalhar com o FAS.
+E aqui são os comandos básicos que a gente vai utilizar,
+que eu deixei aqui.
+E aqui as bibliotecas que a gente vai utilizar nele,
+que é o App Engine,
+que ele é responsável pela criação dos aplicativos.
+O cloud build, que é o construtor do aplicativo,
+o artifact, que é o nosso orquestrador,
+o cloud run, que é a nossa FAS,
+ele é o que vai disparar o serviço,
+e o IAM é o que controla as permissões.
+E aí só para a gente fechar aqui a parte teórica,
+sobre o que é o Docker,
+o Docker são containers virtuais
+que você consegue rodar imagens do sistema professional,
+pode rodar Windows,
+pode rodar Windows, pode rodar Mac.
+Eu estou utilizando o Linux, porque não faz sentido
+num teste você pagar uma licença Windows,
+mas eu não vou entrar nesse método do sistema professional,
+da compilação, para compilar o delft para Linux,
+você pode utilizar o Pa server,
+tem bastante vídeo no internet sobre ele.
+E aqui tem os comandos básicos do Docker,
+porque a gente vai utilizar,
+eu deixei esse, e esse sudo Docker build aqui,
+felizado, porque a gente vai utilizar ele dentro da cloud,
+não vai dar tempo de mostrar ele,
+rodando no nosso ambiente local.
+Então, como diz o Linux,
+tal que este show me decode,
+vamos para a parte prática.
+Então, aqui no delft,
+o delft não tem nada demais nele,
+aqui é a minha pay gate,
+vamos construir,
+só voltar aqui,
+aqui é a minha pay gate.
+Então, aqui é apenas um Morse,
+estou dando na porta 8080,
+com os cores ativos,
+onde temos as nossas fotos.
+E aqui nas fotos,
+eu estou indicando os verbos HTTPs que eu vou estar utilizando,
+que é o get, post, boot, delet,
+e o path,
+e para cada,
+para cada verba HTTP,
+eles são rest,
+para dentro do meu microservice.
+No caso aqui,
+eu tenho um endereço que o cloud me fornece,
+mas é minha ORI.
+E este aqui é a minha pay gate,
+então ela vai cuidar da volta do meu microservice,
+e aqui é o meu microservice de delivery,
+que é o exemplo que eu criei.
+Também é um Morse,
+estou dando na porta 8080,
+o mesmo critério,
+tem as minhas ORIs,
+que são os meus verbos HTTPs,
+e dispara uma requisição aqui,
+no caso aqui,
+ele está disparando para o meu Firebase,
+que é o meu banco de dados aqui.
+Certo,
+então vamos para,
+vamos para a nuvem.
+Aqui não consegui ativar todos os serviços aqui,
+porque leva um bom tempo,
+só para criar o cloud build,
+ali em uns 10 minutos.
+Então aqui dentro da cloud,
+é só dar um novo projeto,
+porque eu já tenho um criado aqui,
+eu estou utilizando o meu projeto,
+não tem nada de mais,
+é só ir seguindo o que vai pedir,
+praticamente um next-next finish ali.
+E para você ativar as bibliotecas que eu citei aqui,
+que está aqui,
+é só escrever o nome delas,
+o App Engine,
+é só escrever aqui o App Engine,
+e ele vai aparecer por aqui.
+Aqui o App Engine,
+no caso do App Engine,
+na hora de criar,
+ele é a única atenção dele que você tem que colocar na linguagem
+que ele fosse estar,
+vai estar lá para,
+então, JavaScript,
+PHP, você coloca em outros,
+e o ambiente dele vai ser flexível.
+O outros,
+quer dizer que a gente vai utilizar binários,
+e o flexível quer dizer que a gente vai utilizar os containers.
+Então é só clicar nele e fazer a criação dele,
+o mesmo a gente vai utilizar para o cloud build,
+é só escrever o cloud build aqui,
+porque ele vai sugerir para você,
+você vai só ativar também,
+vai só dar um Enable nele,
+e é só seguir esses mesmos passos para todos aqui.
+Não precisa criar um tipo de configuração nele,
+só o App Engine que você vai ter que apontar
+aquela linguagem flexível,
+e após ter ativado todos,
+a gente vai vir aqui,
+e vai entrar no Google Shell,
+e vai levar um tempinho que só vai iniciar a máquina,
+e eu vou abrir em uma lateral aqui,
+para a gente ter uma aba dedicada para o console.
+Aqui dentro do console,
+eu vou indicar o meu projeto,
+que é esse projeto de livro que eu criei aqui,
+esse que está apontado aqui,
+e aí aqui dentro,
+a gente vai clicar nesse lá,
+precisinho aqui para abrir o editor,
+por padrão, toda vez que a gente cria um projeto,
+o Google ele já cria uma pasta para a gente,
+então é só vir aqui no open folder,
+e aqui eu criei uma pasta chamada de livro,
+e eu vou abrir ela.
+Aqui, no meu arquivo locais,
+eu tenho os dois compilados do Delfin,
+que é a mpd8 e meu microservice,
+e que são os binários do Linux,
+que eu estou utilizando no WSL,
+estou utilizando o Linux aqui,
+que é o Google que estou rodando,
+eu vou precisar do meu app,
+e o meu cloud build em,
+e o docker file,
+então o que a gente vai fazer com esses arquivos,
+a gente vai passar aqui para dentro do cloud,
+no caso eu criei aqui uma pasta chamada apg8,
+e uma pasta do delivery do microservice,
+e no caso aqui é só rastar para o navegador,
+eu já economizei um tempo aqui de subir o upload,
+deixa eu deixar ele aqui,
+e como que funcionam essas estruturas,
+esse app M aqui,
+é o que indica para o nosso app engine,
+que ele está funcionando em um ambiente flexível,
+aqui de containers,
+e o runtime dele é um custom,
+porque vai ser um binário,
+no caso se fosse Python, ele teria Python,
+ele é a versão do comprador do Python,
+aqui o nosso cloud build,
+aqui eu estou apontando para o serviço do docker,
+dentro da cloud,
+e lembra que eu deixei aqui,
+marcado no docker,
+esse comando eu subo,
+e o docker build-d,
+isso aqui é o comando que a gente utiliza para criar o docker,
+então no caso eu estou apontando para o Google,
+que nos argumentos dele,
+o que eu quero que o docker faça,
+que é o build-d,
+dentro do meu repositório,
+e a imagem que eu quero que ele crie,
+e aqui eu estou só apontando qualquer imagem,
+e para ele criar essa imagem para mim,
+ele precisa desse arquivo aqui,
+o docker file,
+dentro do docker file,
+para você utilizar o docker,
+você vai ter que ter uma conta aqui no docker hub,
+e aqui no docker hub,
+eu estou utilizando essa imagem do Ubuntu,
+e aqui dentro do Ubuntu estou utilizando a versão 2204 dele,
+então eu estou dizendo tudo isso na minha cloud,
+que eu quero pegar o Ubuntu 22.4,
+que ele vai ser apontado para essa imagem,
+e aqui os runs são os passos que vão ser criados,
+então eu estou dizendo que para ele criar,
+depois que ele baixar a imagem,
+ele vai dar uma apt-get update para atualizar o sistema operacional,
+e vai instalar essas links,
+como eu estou trabalhando com o horse,
+eu estou trabalhando com o HTTP,
+e eu preciso do ssr e do kernel aqui,
+então essas duas bibliotecas que são bem importantes,
+e essas são meio que padrões do docker.
+Estou pedindo para ele criar uma pasta chamada web,
+dar uma mkdir aqui,
+para quem fez os cursinhos de semideira,
+é o mesmo comando,
+estou pedindo para ele copiar aqui a minha pg8,
+que é o meu binário para dentro da pasta f,
+então eu estou pegando de fora,
+e passando para dentro do container que ele vai criar.
+Aqui eu estou chmodi para dar a permissão do Linux,
+então estou dando a renúncia hmodi aqui
+para eu ter permissão no meu binário,
+dizendo que eu vou expor o meu container na porta 8080,
+que é a porta que o horse está escutando,
+e aqui eu estou dizendo que a minha workdir,
+que é para eu posicionar na minha porta,
+na minha pasta app,
+então quando for levantado a container,
+eu vou estar na porta app,
+e eu vou dar um cmd.bpg8,
+esse cmd.bpg8 é para instartar o binário dentro do Linux,
+e o mesmo aqui é a mesma configuração que prometa o serviço,
+no caso do acerfile dele,
+a única diferença é que ele está passando o binário
+do micro serviço para dentro do container.
+E aqui no shell,
+a gente tem que só que entrar na raiz
+onde está o cloudbuild,
+e a gente vai instartar ele,
+vamos dar um cmd.bpg8,
+e vamos entrar aqui na nossa pg8,
+então cmd.bpg8,
+ele aqui de sensitive.
+E esse para ver o diretório,
+certo, estou aqui, tenho o binário,
+e as umas arquivas de configuração,
+o cloudbuild, o app está apontando o app engine,
+o cloudbuild vai chamar o Dockerfile,
+e vai fazer a construção.
+Para criar um repositório,
+no meu caso aqui,
+eu vou entrar no artifacts aqui,
+que é o nosso orquestrador,
+eu já criei a minha paixinha com o repositório,
+que é o meu Dockerhackle aqui.
+E para fazer essa criação,
+ele vai estar aqui dentro.
+É esse comando aqui para criar o repositório,
+que é o de cloud, artifacts, repositories,
+create.hackle,
+e é só rodar esse comando aqui dentro da cloud,
+não é uma coisa que ele vai na falha,
+porque ele vai dizer que eu já tenho esse repositório.
+Quando roda o primeiro comando dentro de uma pasta,
+ele perde uma autorização,
+é só clicar em autorizar,
+ele vai rodar com a conta aqui do Google,
+e aqui está o Dockerhackle,
+que é o que eu já criei,
+e ele guarda o meu container.
+Caso eu vou ter dois containers aqui dentro.
+Caso ele só der um erro dizendo que já existe,
+que existe.
+E para criar esse container,
+como funciona,
+é esse comando aqui de cloudbuildsubmit,
+eu vou chamando o configurador,
+e vou apontar para o meu cloudbuild,
+que é o cloudbuild dessa pasta aqui.
+Então ele vai executar só esses arquivos aqui.
+Aí depois se repete o mesmo processo
+para o meu outro microservice.
+Então, ao rodar ele aqui,
+ele vai começar a fazer a criação.
+O container cria aqui, o que ele vai fazer?
+Ele vai criar uma imagem,
+e nessa imagem você consegue
+controlar suas versões.
+Aqui eu tenho as versões anteriores,
+e aqui eu tenho a última que eu testei,
+que foi a 22 horas atrás.
+No suporto eu estou subindo uma versão,
+e ela está com bug,
+e eu preciso voltar.
+É só eu vim apontar para o container anterior,
+que está com a versão anterior do meu binário.
+E você não precisa parar
+em nenhum momento o seu cliente.
+Então se você tem, sei lá,
+10 mil clientes pendurados,
+ele não subir para o serviço,
+ele está bugado,
+e você tem 1 ou 2 mil clientes.
+Você atualiza,
+e aí ele espera todas as requisições anteriores terminar,
+e ele passa para a nova.
+Enquanto está aqui, ele...
+A hora que se pode dar,
+ele sempre vai dar um erro, não é?
+Eu acho que...
+eu zoei o meu...
+meu apetite.
+A gente só vê o que aconteceu aqui.
+A gente está procurando o meu...
+E após criar aqui o container,
+a gente vai vincular o container com a nossa cloud,
+então vai executando e eu vou correndo aqui.
+Aqui dentro, para criar uma cloud LAN,
+que é a nossa faz,
+é só dar um criar serviço aqui.
+Como eu já tenho ele,
+então eu não vou criar dos animais,
+eu vou mostrar aqui como funciona.
+É só selecionar o container
+que você acabou de criar,
+no caso da versão dele,
+ele vai ir para o propiastrador,
+vai expandindo,
+vai pegar o container,
+e aqui é a última que eu tenho aqui,
+quando você está buildando a outra ali,
+e você seleciona ela.
+Então você apontou aqui sua cloud,
+a sua cloud LAN toda vez que ela for chamada,
+vai disparar esse container.
+E a...
+e o que você está dizendo,
+que já tem nos distâncias
+e o tipo de autenticação,
+no caso eu estou utilizando autenticação
+direto na pgtwin.
+Então eu só abrir a minha pgtwin,
+que eu já tenho criado aqui.
+Agora ele está rodando certinho aqui.
+Ele já começou a dar os steps aqui,
+que são os runs que eu apontei
+aqui no Dockerfine.
+E aqui dentro,
+o que acontece quando a gente implementa?
+Ele ganha uma URL aqui.
+Então eu vou trabalhar
+com essa URL toda vez que eu chamar
+essa URL barra,
+o que está dentro do meu Docker,
+que eu defini aqui no Delphi,
+no caso da minha pgtwin.
+No caso da minha pgtwin,
+ela está escutando na URL
+de DelphiMS pedidos.
+Então toda vez que eu chamar essa URL
+aqui,
+ele vai disparar no caso aqui um...
+ele vai disparar
+aqui um dos verbos HTTP,
+que está rodando
+no microservice do container.
+E...
+deixa eu ver se ele já rodou,
+já rodou agora os statususas.
+Então aqui,
+eu vou dar someditar a implementação.
+No caso não tem como configurar,
+a implementação continua.
+Aqui você aponta para um repositório do Git
+e toda vez que você dá um PR nele,
+ele já atualiza para você.
+É como uma fina de...
+de conhecimento,
+para a gente ver como funciona.
+Estou fazendo aqui na mão.
+Tô dizendo que a porta do meu container
+que já é 8080,
+então a Cláudia Ubuntu
+tem que estar escutando aqui.
+E aqui,
+legal,
+eu vou deixar.
+E esse aqui é o front,
+que é reconfigurado em Android.
+Esse front só para...
+antes de eu atualizar aqui,
+eu tenho essa classe aqui onde estão os meus verbos.
+E ele erda dessa classe aqui
+que só está aguardando a URL.
+A URL com a URL.
+Então,
+ele vai chamar a minha perigueita
+e vai chamar
+o microserviço de delivery.
+E o microserviço de delivery vai comunicar
+o microserviço.
+Toda vez que eu abro essa página aqui,
+ela dá um get.
+Então, eu só vou separar aqui
+e vou deixar esse cara aqui.
+Vou melhorar aqui a disposição.
+Então, eu selecionei aqui a nova versão
+do...
+do container.
+Aqui está,
+que agora já é 2 minutos atrás.
+E vou dar um implementar.
+Olha que bacana, ele está implementando.
+A Cláudia Luana, que ela está em atualização
+e eu não perdi o acesso.
+Meu get funcionando.
+E olha aqui, ele trabalhando.
+Meus equisições estão 100% na versão anterior
+de 22 horas atrás, que é o que está com o flagzinho aqui.
+E eu não perdi.
+Eu consigo fazer até um post aqui.
+Para qualquer coisa.
+Dá um incluir aqui.
+O outro post,
+foi, inclusive, pedido 3 aqui,
+de uma pedida no Firebase.
+Ele continua trabalhando
+e assim que ele terminar,
+aqui, olha, ele atualizou.
+Agora, 100% das equisições já estão na nova versão.
+Esse daqui é a Pegate, o que está chamando
+a outra Cloud Run.
+E o processo para atualizar essa Cloud Run
+é a mesma.
+Então, eu só vim aqui em um shell.
+Mas eu vou voltar a pasta
+para ter que ser de dois pontos.
+O LCD.
+Pedidos.
+Underline.
+B,
+R,
+C,
+R,
+C.
+E eu vou botar esse comando do Cloud Build
+e só me chamando o Cloud Build dele aqui.
+Quanto ele está executando aqui.
+E uma coisa que a gente viu nas boas práticas,
+né?
+Apenas a Pegate deve estar disposta
+e o microserviço não.
+Os microserviços dentro do orquestrador lá
+não deve estar.
+Tivesse mais microserviços dentro desse container.
+E aqui,
+dentro da
+do próprio Google,
+que se eu executar o comando,
+ele vai dar um get, né?
+Então, se eu chamar aqui,
+eu vou chamar o meu container.
+Um pedido de Firebase,
+olha, 100% de acesso.
+A Pegate eu não sei que chamar ele.
+Só esperar terminar de atualizar o container.
+Ele está terminando o Build aqui.
+Aqui os steps do
+do upper file.
+Criando
+uma target dele.
+E finalizou
+criação.
+E aqui,
+a gente vai fazer o mesmo esquema.
+A gente está
+a nossa Cloud Run do microserviço.
+Vem pro orquestrador.
+Criando
+e vou selecionar aqui a última
+versão que eu criei.
+E ao salvar,
+vou implementar aqui.
+Mesma coisa, o mesmo microserviço que está lá
+utilizando direto, o Firebase,
+continuar funcionando.
+Se eu
+alterar aqui,
+ele continua funcionando
+enquanto ele implementa
+a nova versão.
+Enquanto todos os usuários estão
+trabalhando aqui dentro
+da versão anterior até
+de atualizar de vez.
+E o que é legal aqui também,
+se eu consigo acessar as métricas
+enquanto ele atualiza,
+deixa eu ter que esperar.
+Não consigo assim.
+Opa!
+Como é que deu uma trabadinha aqui?
+E aqui a gente tem
+os relatórios
+para a gente ter tomadas de decisões
+da Cloud, de como está
+as solicitações.
+A gente vai terminar de
+pedir não a regrupas da chuva.
+Mas aqui ele vai ter
+a pontagem de solicitações
+de containers.
+De quantas instâncias ele precisou
+utilizar?
+A latência que foi, as demoras,
+você consegue ter
+uma série de informações
+da utilização do sumir para o serviço.
+Porque toda a estrutura
+da sua infraestrutura
+é controlada
+pelo Google Cloud.
+Bom pessoal,
+é isso.
+Eu não vou entrar tantos detalhes
+aqui dos relatórios.
+Ele é bem auto-explicativo.
+E espero ter conseguido
+realmente descomplicar a Cloud
+principalmente utilizando Delphi,
+que não é uma abordagem muito comum
+para a gente,
+que é do meio do Delphi.
+A gente é mais acostumado
+com os monolitos, mas a gente
+consegue trabalhar assim
+no novo formato
+e
+é isso, pessoal.
+Se alguém tiver dúvidas,
+quiser perguntar
+um momento e agora.
+Vou parar a gravação aqui.
