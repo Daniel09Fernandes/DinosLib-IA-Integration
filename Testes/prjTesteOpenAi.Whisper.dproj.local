@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/05/31 23:32:58.000.340,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/06/03 20:21:45.000.593,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/07/17 21:04:40.000.994,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/07/17 21:11:49.000.069,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/07/29 21:38:55.000.220,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/07/29 22:24:10.000.435,C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\uTesteOpenIA.Whisper.dfm=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.dfm</Transaction>
+    <Transaction>2024/07/29 22:24:10.000.435,C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\uTesteOpenIA.Whisper.pas=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/07/29 23:09:03.000.655,=D:\Fontes\componenetes\bass\bass24\delphi\BassTest\BTMain.pas</Transaction>
+    <Transaction>2024/07/29 23:09:33.000.032,=D:\Fontes\componenetes\bass\bass24\delphi\bass.pas</Transaction>
+    <Transaction>2024/07/29 23:11:51.000.288,D:\Fontes\componenetes\bass\bass24\delphi\BassTest\BTMain.pas=</Transaction>
+    <Transaction>2024/07/29 23:16:34.000.059,D:\Fontes\PalestraIA\ProjetoTeste\prjTesteOpenAi.Whisper.dproj=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
+    <Transaction>2024/07/30 13:45:28.000.936,C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\uTesteOpenIA.Whisper.pas=</Transaction>
+    <Transaction>2024/07/30 13:45:49.000.257,D:\Fontes\componenetes\bass\bass24\delphi\bass.pas=</Transaction>
+    <Transaction>2024/07/30 13:46:13.000.536,=D:\Fontes\PalestraIA\ProjetoTeste\bass.pas</Transaction>
+    <Transaction>2024/07/30 13:46:13.000.663,=D:\Fontes\PalestraIA\ProjetoTeste\uTesteOpenIA.Whisper.pas</Transaction>
+    <Transaction>2024/08/07 00:11:00.000.253,=D:\Fontes\PalestraIA\PrjErpIA\Modules\Dinos.Bridge.Bass.pas</Transaction>
+    <Transaction>2024/08/07 00:11:00.000.318,=D:\Fontes\PalestraIA\PrjErpIA\Modules\Dinos.Bridge.Whisper.Open.IA.pas</Transaction>
+    <Transaction>2024/08/18 11:43:51.000.479,=D:\Fontes\PalestraIA\ProjetoTeste\Unit1.pas</Transaction>
+    <Transaction>2024/08/18 11:44:23.000.629,D:\Fontes\PalestraIA\PrjErpIA\Modules\DinosBridge\Dinos.Bridge.GPT.Open.IA.pas=D:\Fontes\PalestraIA\ProjetoTeste\Unit1.pas</Transaction>
+    <Transaction>2024/08/18 18:57:20.585,=D:\Fontes\DinosLib-IA-Integration\Testes\uTesteOpenIA.Whisper.pas</Transaction>
+    <Transaction>2024/08/18 18:57:51.195,=D:\Fontes\DinosLib-IA-Integration\Modules\Audio-Bass\bass.pas</Transaction>
+    <Transaction>2024/08/18 18:58:13.204,=D:\Fontes\DinosLib-IA-Integration\Modules\DinosBridge\Dinos.Bridge.Bass.pas</Transaction>
+    <Transaction>2024/08/18 18:58:13.232,=D:\Fontes\DinosLib-IA-Integration\Modules\DinosBridge\Dinos.Bridge.GPT.Open.IA.pas</Transaction>
+    <Transaction>2024/08/18 18:58:13.264,=D:\Fontes\DinosLib-IA-Integration\Modules\DinosBridge\Dinos.Bridge.Whisper.Open.IA.pas</Transaction>
+  </Transactions>
+</BorlandProject>
