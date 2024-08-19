@@ -20,7 +20,7 @@ Type
     dwDataLen: DWord;
   end;
 
-  TDinosMicRec = class
+  TDinosMediaPlayer = class
   private
   const
     MIC_MUTE            = 4294967296;
@@ -35,8 +35,9 @@ Type
    FPathSaveFile  : String;
    FSilenceCounter: Integer;
    FFreqMic       : Single;
+   FSong          : Cardinal;
    class var
-     FInstance   : TDinosMicRec;
+     FInstance   : TDinosMediaPlayer;
 
    constructor Create();
    procedure SetWaveStream(const Value: TMemoryStream);
@@ -52,11 +53,13 @@ Type
     property FreqMic     : Single        read FFreqMic      write FFreqMic;
     property PathSaveFile: String        read getPathSaveFile write FPathSaveFile;
 
-    procedure StartRecord();
-    procedure StopRecord();
-    procedure PauseForSilence();
+    function  StartRecord(): TDinosMediaPlayer;
+    function  StopRecord(): TDinosMediaPlayer;
+    function  PlaySong(AFile : String): TDinosMediaPlayer;
+    function  PauseForSilence(): TDinosMediaPlayer;
+    function  FreeSongOfMemory: TDinosMediaPlayer;
 
-    class function GetInstance: TDinosMicRec;
+    class function GetInstance: TDinosMediaPlayer;
   end;
    var
      gWaveStream: TMemoryStream; //Copia global para o callback do audio
@@ -83,7 +86,7 @@ end;
 
 { TDinosMicRec }
 
-constructor TDinosMicRec.Create();
+constructor TDinosMediaPlayer.Create();
 begin
   FSilenceCounter := 0;
   FChan  := 0;
@@ -101,23 +104,32 @@ begin
 end;
 
 //Singleton
-destructor TDinosMicRec.Destroy;
+destructor TDinosMediaPlayer.Destroy;
 begin
   BASS_RecordFree();
   Bass_Free;
   WaveStream.Free;
+  FreeSongOfMemory;
   inherited;
 end;
 
-class function TDinosMicRec.GetInstance: TDinosMicRec;
+function TDinosMediaPlayer.FreeSongOfMemory: TDinosMediaPlayer;
+begin
+ if FSong > 0 then
+   BASS_StreamFree(FSong);
+
+ Result  := Self;
+end;
+
+class function TDinosMediaPlayer.GetInstance: TDinosMediaPlayer;
 begin
   if not Assigned(FInstance) then
-    FInstance := TDinosMicRec.create;
+    FInstance := TDinosMediaPlayer.create;
 
   Result := FInstance;
 end;
 
-function TDinosMicRec.getPathSaveFile: String;
+function TDinosMediaPlayer.getPathSaveFile: String;
 begin
   if FPathSaveFile.trim.isEmpty then
     FPathSaveFile := GetCurrentDir+'\DinosRec.wav';
@@ -125,13 +137,13 @@ begin
   Result := FPathSaveFile;
 end;
 
-function TDinosMicRec.GetWaveStream: TMemoryStream;
+function TDinosMediaPlayer.GetWaveStream: TMemoryStream;
 begin
   gWaveStream := FWaveStream;
   Result      := FWaveStream;
 end;
 
-procedure TDinosMicRec.PauseForSilence;  //Utilizar em um timer, para monitorar
+function TDinosMediaPlayer.PauseForSilence : TDinosMediaPlayer;  //Utilizar em um timer, para monitorar
 var
   level: Single;
 begin
@@ -150,9 +162,18 @@ begin
 
   if FSilenceCounter > STEP_SILENCE_MAX then
     StopRecord;
+
+  Result := self;
 end;
 
-procedure TDinosMicRec.SetGenerateHeaderForWavFile;
+function TDinosMediaPlayer.PlaySong(AFile: String): TDinosMediaPlayer;
+begin
+  FSong := BASS_StreamCreateFile(False, PChar(AFile), 0, 0, 0 {$IFDEF UNICODE} or BASS_UNICODE {$ENDIF});
+  BASS_ChannelPlay(FSong, False);
+  Result := self;
+end;
+
+procedure TDinosMediaPlayer.SetGenerateHeaderForWavFile;
 begin
   with FWaveHdr do
   begin
@@ -172,13 +193,13 @@ begin
   WaveStream.Write(WaveHdr, SizeOf(WAVHDR));
 end;
 
-procedure TDinosMicRec.SetWaveStream(const Value: TMemoryStream);
+procedure TDinosMediaPlayer.SetWaveStream(const Value: TMemoryStream);
 begin
   FWaveStream := Value;
   gWaveStream := FWaveStream;
 end;
 
-procedure TDinosMicRec.StartRecord;
+function TDinosMediaPlayer.StartRecord: TDinosMediaPlayer;
 begin
   if WaveStream.Size > 0 then
   begin
@@ -195,10 +216,12 @@ begin
   begin
     MessageDlg('Não foi possivel inicar a gravção!' + 'ErrorCode ' + inttostr(BASS_ErrorGetCode()), mtError, [mbOk], 0);
     WaveStream.Clear;
-  end
+  end;
+
+  Result := self;
 end;
 
-procedure TDinosMicRec.StopRecord;
+function TDinosMediaPlayer.StopRecord: TDinosMediaPlayer;
 begin
   BASS_ChannelStop(FRChan);
   FRChan := 0;
@@ -214,6 +237,8 @@ begin
   FChan := BASS_StreamCreateFile(True, WaveStream.Memory, 0, WaveStream.Size, 0);
 
   WaveStream.SaveToFile(PathSaveFile);
+
+  Result := self;
 end;
 
 end.
