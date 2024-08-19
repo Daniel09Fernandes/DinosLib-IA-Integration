@@ -68,6 +68,7 @@ end;
 
 procedure TForm2.Button4Click(Sender: TObject);
 begin
+  DinosMic.FreeSongOfMemory;
   Var DinosGpt := TDinosChatGPT.Create;
 
   var Response := DinosGpt.SendMessage('Responda sempre em portugues, Com respostas obvias e genericas apenas para interagir com o usuario do meu sistema, '+
