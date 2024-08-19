@@ -58,6 +58,15 @@ object Form2: TForm2
       'Memo1')
     TabOrder = 4
   end
+  object Button4: TButton
+    Left = 248
+    Top = 408
+    Width = 113
+    Height = 25
+    Caption = 'Text to Speench'
+    TabOrder = 5
+    OnClick = Button4Click
+  end
   object Timer1: TTimer
     OnTimer = Timer1Timer
     Left = 200

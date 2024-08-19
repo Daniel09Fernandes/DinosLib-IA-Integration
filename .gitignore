@@ -1,0 +1,13 @@
+**/Testes/__history
+**/Testes/__recovery
+**/Modules/__recovery
+**/Modules/__history
+**/Modules/DinosBridge/__history
+**/Modules/DinosBridge/__recovery
+**/Testes/Dcu
+**/Testes/Bin/*.json
+**/Testes/Bin/*.srt
+**/Testes/Bin/*.tsv
+**/Testes/Bin/*.txt
+**/Testes/Bin/*.vtt
+**/Testes/Bin/*.wav
