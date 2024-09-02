@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/05/31 23:32:58.000.340,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/06/03 20:21:45.000.593,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/07/17 21:04:40.000.994,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/07/17 21:11:49.000.069,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/08/24 21:19:21.000.622,=C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2024/08/24 21:20:05.000.159,C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas=D:\Fontes\PalestraIA\PrjErpIA\uLogin.View.pas</Transaction>
+    <Transaction>2024/08/24 21:20:05.000.159,C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.dfm=D:\Fontes\PalestraIA\PrjErpIA\uLogin.View.dfm</Transaction>
+    <Transaction>2024/08/24 21:37:54.000.955,C:\Users\danie\OneDrive\Documents\Embarcadero\Studio\Projects\Project2.dproj=D:\Fontes\PalestraIA\PrjErpIA\dpr\ErpIASample.dproj</Transaction>
+    <Transaction>2024/08/24 21:39:35.000.295,D:\Fontes\PalestraIA\PrjErpIA\uLogin.View.dfm=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\uLogin.View.dfm</Transaction>
+    <Transaction>2024/08/24 21:39:35.000.295,D:\Fontes\PalestraIA\PrjErpIA\uLogin.View.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\uLogin.View.pas</Transaction>
+    <Transaction>2024/08/24 21:40:24.000.513,D:\Fontes\PalestraIA\PrjErpIA\dpr\ErpIASample.dproj=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\ErpIASample.dproj</Transaction>
+    <Transaction>2024/08/24 21:42:33.000.525,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/24 21:42:55.000.875,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\uMain.Menu.view.pas</Transaction>
+    <Transaction>2024/08/24 21:43:15.000.228,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\uMain.Menu.view.pas=</Transaction>
+    <Transaction>2024/08/24 21:43:24.000.738,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/24 21:43:36.000.837,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\uMain.Menu.View.pas</Transaction>
+    <Transaction>2024/08/24 21:43:36.000.837,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.dfm=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\uMain.Menu.View.dfm</Transaction>
+    <Transaction>2024/08/25 13:35:02.000.108,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/25 14:12:30.000.456,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Modulos\Faturamento\Nota Fiscal\uFaturamento.NotaFiscal.View.pas</Transaction>
+    <Transaction>2024/08/25 14:12:30.000.456,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.dfm=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Modulos\Faturamento\Nota Fiscal\uFaturamento.NotaFiscal.View.dfm</Transaction>
+    <Transaction>2024/08/25 14:23:55.000.156,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/25 14:24:17.000.460,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Modulos\Faturamento\Nota Fiscal\uFaturamento.NotaFiscal.Model.pas</Transaction>
+    <Transaction>2024/08/25 14:52:00.000.120,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/25 14:53:25.000.033,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Modulos\Faturamento\Nota Fiscal\uFaturamento.NotaFiscal.DTO.pas</Transaction>
+    <Transaction>2024/08/25 17:33:09.000.845,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/25 17:33:30.000.524,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Modulos\Faturamento\Nota Fiscal\uFaturamento.NotaFiscal.Produto.DTO.pas</Transaction>
+    <Transaction>2024/08/25 19:02:40.000.185,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit3.pas</Transaction>
+    <Transaction>2024/08/25 19:03:24.000.813,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit3.dfm=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Modulos\Cadastros\Produto\uCadastros.Produto.View.dfm</Transaction>
+    <Transaction>2024/08/25 19:03:24.000.813,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit3.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Modulos\Cadastros\Produto\uCadastros.Produto.View.pas</Transaction>
+    <Transaction>2024/08/25 19:03:48.000.737,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/25 19:04:26.000.506,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.dfm=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Conexao\Aplicacao\uConexao.Aplicacao.dfm</Transaction>
+    <Transaction>2024/08/25 19:04:26.000.506,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Conexao\Aplicacao\uConexao.Aplicacao.pas</Transaction>
+    <Transaction>2024/08/29 21:33:06.000.983,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Modulos\Cadastros\Cliente\uCadastros.Cliente.View.pas</Transaction>
+    <Transaction>2024/08/31 11:42:13.000.015,=D:\Fontes\DinosLib-IA-Integration\Modules\Audio-Bass\bass.pas</Transaction>
+    <Transaction>2024/08/31 11:42:54.000.588,=D:\Fontes\DinosLib-IA-Integration\Modules\DinosBridge\Dinos.Bridge.GPT.Open.IA.pas</Transaction>
+    <Transaction>2024/08/31 11:42:54.000.476,=D:\Fontes\DinosLib-IA-Integration\Modules\DinosBridge\Dinos.Bridge.Bass.pas</Transaction>
+    <Transaction>2024/08/31 11:42:54.000.651,=D:\Fontes\DinosLib-IA-Integration\Modules\DinosBridge\Dinos.Bridge.Whisper.Open.IA.pas</Transaction>
+    <Transaction>2024/08/31 11:51:36.000.491,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/31 11:52:24.000.814,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\IA-Core\Comands.consts.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/31 13:05:58.000.500,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/31 13:08:00.000.799,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Frames\ChatIA\uChat.IA.View.dfm=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.dfm</Transaction>
+    <Transaction>2024/08/31 13:08:00.000.799,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Frames\ChatIA\uChat.IA.View.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/31 16:25:02.000.426,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\ZeNotinha.dproj=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\ErpIASample.dproj</Transaction>
+    <Transaction>2024/08/31 16:26:09.000.856,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/31 16:27:03.000.060,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\IA-Core\uVerifica.Palavras.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/31 16:27:33.000.815,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\IA-Core\Commands.consts.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\IA-Core\Comands.consts.pas</Transaction>
+    <Transaction>2024/08/31 20:10:17.000.547,=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+    <Transaction>2024/08/31 20:10:41.000.212,D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\IA-Core\uChat.Acoes.Controller.pas=D:\Fontes\DinosLib-IA-Integration\ERP_IA_Sample\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

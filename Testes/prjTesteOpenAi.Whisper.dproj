@@ -130,10 +130,10 @@
             <Form>Form2</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Modules\Audio-Bass\bass.pas"/>
-        <DCCReference Include="..\Modules\DinosBridge\Dinos.Bridge.Bass.pas"/>
-        <DCCReference Include="..\Modules\DinosBridge\Dinos.Bridge.GPT.Open.IA.pas"/>
-        <DCCReference Include="..\Modules\DinosBridge\Dinos.Bridge.Whisper.Open.IA.pas"/>
+        <DCCReference Include="..\midiawares\Audio-Bass\bass.pas"/>
+        <DCCReference Include="..\midiawares\DinosBridge\Dinos.Bridge.Bass.pas"/>
+        <DCCReference Include="..\midiawares\DinosBridge\Dinos.Bridge.GPT.Open.IA.pas"/>
+        <DCCReference Include="..\midiawares\DinosBridge\Dinos.Bridge.Whisper.Open.IA.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -163,7 +163,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="Win32\Debug\prjTesteOpenAi.Whisper.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Bin\prjTesteOpenAi.Whisper.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>prjTesteOpenAi_Whisper.exe</RemoteName>
                         <Overwrite>true</Overwrite>
