@@ -1,9 +1,11 @@
 **/Testes/__history
 **/Testes/__recovery
-**/Modules/__recovery
-**/Modules/__history
-**/Modules/DinosBridge/__history
-**/Modules/DinosBridge/__recovery
+**/midiawares/__recovery
+**/midiawares/__history
+**/midiawares/DinosBridge/__history
+**/midiawares/DinosBridge/__recovery
+**/midiawares/Frames/ChatIA/__history
+**/midiawares/Frames/ChatIA/__recovery
 **/Testes/Dcu
 **/Testes/Bin/*.json
 **/Testes/Bin/*.srt
@@ -11,3 +13,22 @@
 **/Testes/Bin/*.txt
 **/Testes/Bin/*.vtt
 **/Testes/Bin/*.wav
+**/ERP_IA_Sample/__history
+**/ERP_IA_Sample/__recovery
+**/ERP_IA_Sample/Bin/*.json
+**/ERP_IA_Sample/Bin/*.srt
+**/ERP_IA_Sample/Bin/*.tsv
+**/ERP_IA_Sample/Bin/*.txt
+**/ERP_IA_Sample/Bin/*.vtt
+**/ERP_IA_Sample/Bin/*.wav
+**/ERP_IA_Sample/Dcu
+**/ERP_IA_Sample/Conexao/Aplicacao/__history
+**/ERP_IA_Sample/Conexao/Aplicacao/__recovery
+**/ERP_IA_Sample/IA-Core/__history
+**/ERP_IA_Sample/IA-Core/__recovery
+**/ERP_IA_Sample/Modulos/Cadastros/Cliente/__history
+**/ERP_IA_Sample/Modulos/Cadastros/Cliente/__recovery
+**/ERP_IA_Sample/Modulos/Cadastros/Produto/__history
+**/ERP_IA_Sample/Modulos/Cadastros/Produto/__recovery
+**/ERP_IA_Sample/Modulos/Faturamento/Nota Fiscal/__history
+**/ERP_IA_Sample/Modulos/Faturamento/Nota Fiscal/__recovery
