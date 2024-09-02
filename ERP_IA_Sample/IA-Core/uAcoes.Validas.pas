@@ -238,7 +238,7 @@ end;
 procedure TActions.InteragirComUsuario(AText: string; AProc: TDinosProc);
 begin
   FrmChat.GptInteraction(AText, true);
-  sleep(3000);
+  sleep(4000);
   FrmChat.imgRecClick(nil);
   Application.ProcessMessages;
   var ThreadFinished := false;
