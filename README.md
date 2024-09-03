@@ -70,7 +70,8 @@ Adicione a API_KEY no arquivo Dinos.Bridge.GPT.Open.IA.
 
 ### Midware
 - Para usar separadamente em seu projeto, utilize os midwares 
-- Adicionar os midware ao projeto 
+- Adicionar os midware ao projeto
+  
 ![image](https://github.com/user-attachments/assets/84c18d0c-fdaf-4748-b78d-0c8f4cfdd998)
 
 
