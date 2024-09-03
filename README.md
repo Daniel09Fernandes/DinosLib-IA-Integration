@@ -65,6 +65,7 @@ pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/
 
 
 ### Gerar a API Key
+Gere AQUI: https://platform.openai.com/api-keys 
 Adicione a API_KEY no arquivo Dinos.Bridge.GPT.Open.IA.
 ![image](https://github.com/user-attachments/assets/fcfef7cd-5761-425f-9891-e436c4d33984)
 
