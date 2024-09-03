@@ -1,42 +1,76 @@
-Para rodar este projeto, é necessario algumas configurações: 
-![image](https://github.com/user-attachments/assets/4407f9d4-d9b2-4a5e-bed9-560d8d118c47)
+# Configuração do Projeto
 
-Conda: 
-  https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html
-- Anaconda Distribution
+Para rodar este projeto, é necessário realizar algumas configurações:
 
-PyTorch 
-  https://pytorch.org/get-started/previous-versions/
+## Pré-requisitos
 
-  Caso tenha placa de video compativel com cudas, de preferencia, devido ao desempenho.
-# CUDA 11.8
+### BASS
+  Baixe os fontes aqui: https://www.un4seen.com/ 
+  Incluir o bass.pas no projeto e o bass.dll junto com o exe (para este projeto já deixei os fontes do Bass, juntos)
+
+### Conda
+- Instale a distribuição Anaconda: Guia de Instalação
+
+### PyTorch
+- Instale a versão apropriada do PyTorch:
+  - Guia de Instalação
+  - Caso tenha uma placa de vídeo compatível com CUDA, prefira essa opção devido ao desempenho.
+
+#### Instalação com CUDA 11.8
+```bash
 conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=11.8 -c pytorch -c nvidia
-# CUDA 12.1
+```
+
+```bash
 conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=12.1 -c pytorch -c nvidia
-# CPU Only
+```
+
+```bash
 conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 cpuonly -c pytorch
+```
 
-Chocolaty
-  https://chocolatey.org/install 
-Run Get-ExecutionPolicy. If it returns Restricted, then run Set-ExecutionPolicy AllSigned or Set-ExecutionPolicy Bypass -Scope Process.
-
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-
-ffmpeg
- instalar
-  choco install ffmpeg
-
-Whisper
-  Para instalar:  pip install -U openai-whisper
-  pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/whisper.git
-
-Delphi OpenAI
- instalar: https://platform.openai.com/docs/libraries/community-libraries  
-
-Gerar a APIKEY
- Adione a API_KEY gerada no slide anterior no fonts ‘Dinos.Bridge.GPT.Open.IA’ 
- ![image](https://github.com/user-attachments/assets/576d1419-8c5a-4589-8ad5-1bf544174bc6)
-
+### Chocolatey
+ - Instale o Chocolatey: Guia de Instalação
+    - Execute o comando abaixo para configurar a política de execução:
   
+```bash
+Run Get-ExecutionPolicy. If it returns Restricted, then run Set-ExecutionPolicy AllSigned or Set-ExecutionPolicy Bypass -Scope Process.
+```
+
+```bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+### ffmpeg
+- Instale o ffmpeg:
+```bash
+choco install ffmpeg
+```
+
+### Whisper
+- Instale o Whisper:
+```bash
+pip install -U openai-whisper
+```
+
+```bash
+pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/whisper.git
+```
+
+### Delphi OpenAI
+  Instale a biblioteca Delphi OpenAI: Guia de Instalação: https://platform.openai.com/docs/libraries/community-libraries  
+
+
+### Gerar a API Key
+Adicione a API_KEY no arquivo Dinos.Bridge.GPT.Open.IA.
+![image](https://github.com/user-attachments/assets/fcfef7cd-5761-425f-9891-e436c4d33984)
+
+
+
+
+
+
+
+
+
 
