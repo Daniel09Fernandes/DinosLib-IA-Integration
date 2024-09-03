@@ -1,3 +1,6 @@
+# Fluxo de dados
+![Fluxo do projeto](https://github.com/user-attachments/assets/1678b38f-52e5-4264-bb26-bd3ca4e31979)
+
 # Configuração do Projeto
 
 Para rodar este projeto, é necessário realizar algumas configurações:
