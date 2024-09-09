@@ -43,6 +43,7 @@ type
     procedure btnPesqClienteClick(Sender: TObject);
     procedure btnPesqProdutoClick(Sender: TObject);
     procedure btnAdditemClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
 
   public
@@ -235,6 +236,12 @@ end;
 procedure TFrNotaFiscal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     FreeAndNil(FrNotaFiscal);
+end;
+
+procedure TFrNotaFiscal.FormShow(Sender: TObject);
+begin
+  dmConexao.mProdNFE.Close;
+  dmConexao.mProdNFE.Open;
 end;
 
 procedure TFrNotaFiscal.btnPesqClienteClick(Sender: TObject);
