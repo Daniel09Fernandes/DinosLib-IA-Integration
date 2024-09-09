@@ -75,6 +75,10 @@ Adicione a API_KEY no arquivo Dinos.Bridge.GPT.Open.IA.
   
 ![image](https://github.com/user-attachments/assets/84c18d0c-fdaf-4748-b78d-0c8f4cfdd998)
 
+Para rodar o projeto "Zé Notinha" necessário a instalação do ACBr.
+
+caso contrário, pode executar o projeto de teste.
+
 
 
 
