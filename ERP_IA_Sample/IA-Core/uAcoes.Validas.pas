@@ -332,12 +332,14 @@ begin
  var  Validador := TValidador.Create; 
  var  Action := TActions.Create;
  var  palavrasEncontradas: TList<string>;
- var  Palavra: string;     
- try 
+ var  Palavra: string;
+ try
+    var GerouAcao := false;
     Atext := AText.replace('(base)','');
-    palavrasEncontradas := Validador.Validate(AText.ToUpper);    
+    palavrasEncontradas := Validador.Validate(AText.ToUpper);
     for Palavra in palavrasEncontradas do
     begin
+      GerouAcao := true;
         if Palavra.Contains(taAbrir.ToString.ToLower) then
           Action.FAcao := taAbrir
         else if Palavra.Contains(taFechar.ToString.ToLower) then
@@ -355,10 +357,13 @@ begin
               Action.FMenu := taClientes
           else if MENU_CADASTRO_PRODUTO.ToLower.Contains(Palavra) then
                 Action.FMenu := taProduto                         
-    end;  
+    end;
+    if GerouAcao then
+    begin
       Action.ExecutarAcoesMenuCliente;
       Action.ExecutarAcoesProdutos;
       Action.ExecutarAcoesMenuNotaFiscal;
+    end;
  finally
    Validador.free;
    palavrasEncontradas.Free;

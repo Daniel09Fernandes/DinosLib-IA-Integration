@@ -110,30 +110,30 @@ implementation
 
 procedure TdmConexao.DataModuleCreate(Sender: TObject);
 begin
-  for var i := 0 to ComponentCount -1 do
-  begin
-    if Components[i] is TFDMemTable then
-    begin
-      var fileDb := '.\Dbs\database.'+Copy(String(TFDMemTable(Components[i]).Name), 2)+ '.db';
-      if FileExists(fileDb) then
-         TFDMemTable(Components[i]).LoadFromFile(fileDb);
-       sleep(200);
-    end;
-  end;
+//  for var i := 0 to ComponentCount -1 do
+//  begin
+//    if Components[i] is TFDMemTable then
+//    begin
+//      var fileDb := '.\Dbs\database.'+Copy(String(TFDMemTable(Components[i]).Name), 2)+ '.db';
+//      if FileExists(fileDb) then
+//         TFDMemTable(Components[i]).LoadFromFile(fileDb);
+//       sleep(200);
+//    end;
+//  end;
 end;
 
 procedure TdmConexao.DataModuleDestroy(Sender: TObject);
 begin
-  for var i := 0 to ComponentCount -1 do
-  begin
-    if Components[i] is TFDMemTable then
-    begin
-      var fileDb := '.\Dbs\database.'+Copy(String(TFDMemTable(Components[i]).Name), 2)+ '.db';
-      if FileExists(fileDb) then
-        TFDMemTable(Components[i]).SaveToFile(fileDb);
-      sleep(200);
-    end;
-  end;
+//  for var i := 0 to ComponentCount -1 do
+//  begin
+//    if Components[i] is TFDMemTable then
+//    begin
+//      var fileDb := '.\Dbs\database.'+Copy(String(TFDMemTable(Components[i]).Name), 2)+ '.db';
+//      if FileExists(fileDb) then
+//        TFDMemTable(Components[i]).SaveToFile(fileDb);
+//      sleep(200);
+//    end;
+//  end;
 end;
 
 procedure TdmConexao.mClienteBeforePost(DataSet: TDataSet);

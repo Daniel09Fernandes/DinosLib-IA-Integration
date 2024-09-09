@@ -13,6 +13,7 @@ object FrNotaFiscal: TFrNotaFiscal
   FormStyle = fsMDIForm
   Position = poMainFormCenter
   OnClose = FormClose
+  OnShow = FormShow
   TextHeight = 15
   object btnPesqCliente: TSpeedButton
     Left = 136
