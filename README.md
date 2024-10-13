@@ -79,6 +79,13 @@ Para rodar o projeto "Zé Notinha" necessário a instalação do ACBr.
 
 caso contrário, pode executar o projeto de teste.
 
+---
+
+### Detlalhes 
+PDF com a explicação: https://github.com/flrizzato/EmbarcaderoConference/blob/master/2024/ia_ml_iot/DanielFernandesRodrigues.pdf
+
+Video da demonstração: https://github.com/flrizzato/EmbarcaderoConference/blob/master/2024/ia_ml_iot/DanielFernandesRodrigues.mp4 
+
 
 
 
