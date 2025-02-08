@@ -76,8 +76,9 @@ Add the API_KEY in the file ```Dinos.Bridge.GPT.Open.IA```.
   
 ![image](https://github.com/user-attachments/assets/84c18d0c-fdaf-4748-b78d-0c8f4cfdd998)
 
-To run the "Zé Notinha" project, the installation of ACBr is required. 
-https://github.com/ProjetoACBr/ACBr  
+To run the "Zé Notinha" project, the installation of Fortes Report and ACBr is required. 
+Fortes https://github.com/fortesinformatica/fortesreport-ce
+ACBr https://github.com/ProjetoACBr/ACBr  
 
 Otherwise, you can run the test project.
 
