@@ -1,25 +1,26 @@
-# Fluxo de dados
-![Fluxo do projeto](https://github.com/user-attachments/assets/1678b38f-52e5-4264-bb26-bd3ca4e31979)
+# Project Flow
+![image](https://github.com/user-attachments/assets/5f1ffb76-33d9-42ea-8378-0121cf550605)
 
-# Configuração do Projeto
 
-Para rodar este projeto, é necessário realizar algumas configurações:
+# Project Configuration
 
-## Pré-requisitos
+To run this project, some configurations are necessary:
+
+## Prerequisites
 
 ### BASS
-  Baixe os fontes aqui: https://www.un4seen.com/ 
-  Incluir o bass.pas no projeto e o bass.dll junto com o exe (para este projeto já deixei os fontes do Bass, juntos)
+  Download the sources here: https://www.un4seen.com/
+  Include bass.pas in the project and bass.dll along with the executable (for this project, the Bass sources are already included).
 
 ### Conda
-- Instale a distribuição Anaconda: https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html 
+- Install the Anaconda distribution: https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html
 
 ### PyTorch
-- Instale a versão apropriada do PyTorch:
-  - Guia de Instalação: https://pytorch.org/get-started/previous-versions/  
-  - Caso tenha uma placa de vídeo compatível com CUDA, prefira essa opção devido ao desempenho.
+- Install the appropriate version of PyTorch:
+  - Installation Guide: https://pytorch.org/get-started/previous-versions/  
+  - If you have a CUDA-compatible graphics card, prefer this option for better performance.
 
-#### Instalação com CUDA 11.8
+#### Installation with CUDA 11.8:
 ```bash
 conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=11.8 -c pytorch -c nvidia
 ```
@@ -33,8 +34,8 @@ conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 cpuonly -c py
 ```
 
 ### Chocolatey
- - Instale o Chocolatey: https://chocolatey.org/install 
-    - Execute o comando abaixo para configurar a política de execução:
+ - Install Chocolatey: https://chocolatey.org/install 
+    - Run the following command to set the execution policy:
   
 ```bash
 Run Get-ExecutionPolicy. If it returns Restricted, then run Set-ExecutionPolicy AllSigned or Set-ExecutionPolicy Bypass -Scope Process.
@@ -45,13 +46,13 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 
 ### ffmpeg
-- Instale o ffmpeg:
+- Install ffmpeg:
 ```bash
 choco install ffmpeg
 ```
 
 ### Whisper
-- Instale o Whisper:
+- Install Whisper:
 ```bash
 pip install -U openai-whisper
 ```
@@ -61,30 +62,30 @@ pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/
 ```
 
 ### Delphi OpenAI
-  Instale a biblioteca Delphi OpenAI: Guia de Instalação: https://platform.openai.com/docs/libraries/community-libraries  
+  Install the Delphi OpenAI library: Installation Guide: https://platform.openai.com/docs/libraries/community-libraries  
 
 
-### Gerar a API Key
-Gere AQUI: https://platform.openai.com/api-keys 
-Adicione a API_KEY no arquivo Dinos.Bridge.GPT.Open.IA.
+### Generate API Key
+Generate it HERE: https://platform.openai.com/api-keys 
+Add the API_KEY in the file ```Dinos.Bridge.GPT.Open.IA```.
 ![image](https://github.com/user-attachments/assets/fcfef7cd-5761-425f-9891-e436c4d33984)
 
 ### Midware
-- Para usar separadamente em seu projeto, utilize os midwares 
-- Adicionar os midware ao projeto
+- To use separately in your project, utilize the midwares.
+- Add the midware to the project.
   
 ![image](https://github.com/user-attachments/assets/84c18d0c-fdaf-4748-b78d-0c8f4cfdd998)
 
-Para rodar o projeto "Zé Notinha" necessário a instalação do ACBr.
+To run the "Zé Notinha" project, the installation of ACBr is required. 
+https://github.com/ProjetoACBr/ACBr  
 
-caso contrário, pode executar o projeto de teste.
+Otherwise, you can run the test project.
 
 ---
 
-### Detlalhes 
-PDF com a explicação: https://github.com/flrizzato/EmbarcaderoConference/blob/master/2024/ia_ml_iot/DanielFernandesRodrigues.pdf
-
-Video da demonstração: https://github.com/flrizzato/EmbarcaderoConference/blob/master/2024/ia_ml_iot/DanielFernandesRodrigues.mp4 
+### Additional Notes 
+Material about this project 
+https://www.canva.com/design/DAGeDMAtEeI/yqwJUz2lkixw-B6_t-OSOQ/edit?utm_content=DAGeDMAtEeI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton  
 
 
 
