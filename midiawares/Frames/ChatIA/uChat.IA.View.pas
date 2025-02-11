@@ -44,7 +44,7 @@ uses
   Dinos.Bridge.GPT.Open.IA;
 
 Const
-  RESP_OBVIA =  'Responda sempre em portugues, Com respostas obvias e genericas apenas para interagir com o usuario do meu sistema, '+
+  RESP_OBVIA =  'Responda sempre em Inglês, Com respostas obvias e genericas apenas para interagir com o usuario do meu sistema, '+
                                         'Leve em consideração que vocês conhece o sistema, caso o usuario peças para abrir algum menu, abra, se pedir para '+
                                         ' preencher, preencha. Comando do usuario é: ';
 
@@ -68,11 +68,13 @@ type
     { Private declarations }
     FControle : TControle;
     FInteragirComGPTAoSilenciar: boolean;
+    FTraduzir: Boolean;
   public
     procedure GptInteraction(AText: string; APassarTextoDiretoSemInteracaoGPT: boolean = false);
     procedure ControleVisibilidadeMicGravando(AValue: boolean);
     property InteragirComGPTAoSilenciar: Boolean read FInteragirComGPTAoSilenciar write FInteragirComGPTAoSilenciar;
     property Controle: TControle read FControle;
+    property Traduzir: Boolean read FTraduzir write FTraduzir;
 
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -89,7 +91,6 @@ begin
   imgRec.Visible := not AValue;
   imgStopRec.Visible :=   AValue;
   FControle := TControle(ifthen(AValue, 1, 0));
-
 end;
 
 constructor TfrmChatIA.Create(AOwner: TComponent);
@@ -119,7 +120,10 @@ begin
   if not APassarTextoDiretoSemInteracaoGPT then
     Response := DinosGpt.SendMessage(AText)
   else
-    Response := AText;
+    if Traduzir then
+      Response := DinosGpt.SendMessage('Traduza para Inglês, mantendo a coerencia da frase: '+ AText)
+    else
+      Response := AText;
 
   DinosGpt.TextToSpeench(Response).SaveToFile(TDinosMediaPlayer.GetInstance.PathSaveFile);
 
@@ -171,10 +175,10 @@ end;
 
 procedure TfrmChatIA.tmrPausaPorSilencioTimer(Sender: TObject);
 begin
-  TDinosMediaPlayer.GetInstance.PauseForSilence;
-
-  if TDinosMediaPlayer.GetInstance.FreqMic <= 0 then
-    ControleVisibilidadeMicGravando(false);
+//  TDinosMediaPlayer.GetInstance.PauseForSilence;
+//
+//  if TDinosMediaPlayer.GetInstance.FreqMic <= 0 then
+//    ControleVisibilidadeMicGravando(false);
 
 end;
 

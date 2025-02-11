@@ -16,8 +16,9 @@ uses
 
  Type
    TDinosProc = TProc<string>;
-   TActionsMenus = (taNFe, taProduto, taClientes);
-   TAction=(taAbrir, taFechar, taEmitir, taGerar, taAlterar, taEditar, taCadastrar, taIncluir, taExcluir, taDeletar);
+   TActionsMenus = (taNFe, taProduto, taClientes, taInvoice);
+   TAction=(taAbrir, taFechar, taEmitir, taGerar, taAlterar, taEditar, taCadastrar, taIncluir, taExcluir, taDeletar,
+            taOpen, taClose, taGenerate, taEdit, taRegister, taInclude, taAdd, taDelete);
 
    TActionsHelper = record helper for  TAction
      function ToString: string;
@@ -113,7 +114,7 @@ begin
        IncluirItem;
        InteragirComUsuario('Todos os dados estão corretos? Posso emitir a Nota? ', procedure(resp: string)
                                                                                    begin
-                                                                                      if TratarValor(resp).ToLower.Contains('sim') then
+                                                                                      if (TratarValor(resp).ToLower.Contains('sim') or (TratarValor(resp).ToLower.Contains('yes'))) then
                                                                                       FrNotaFiscal.BtnEmitirNfClick(nil);
                                                                                    end);
      end;
@@ -277,13 +278,16 @@ function TActions.TratarValor(AValor: string; ADataType: TFieldType = ftString):
 begin
   Result := Copy(
                   AValor
-                   .replace('(base)', '')
-                   .replace(',', '')
+                   .Replace('(base)', '')
+                   .Replace(',', '')
                 ,26).trim;
 
    if ADataType = ftFloat then
    begin
-     Result := Result.Replace(',','.');
+     Result := Result
+                 .Replace(',','.')
+                 .Replace('-', '')
+                 .Trim;
      var outFl: double;
      if not TryStrToFloat(Result,outFl) then
        Result := '0';
@@ -292,7 +296,9 @@ begin
          begin
            Result := Result
                          .Replace(',','')
-                         .Replace('.','');
+                         .Replace('.','')
+                         .Replace('-', '')
+                         .Trim;
            var outInt: integer;
            if not TryStrToInt(Result,outInt) then
              Result := '0';
@@ -333,6 +339,7 @@ begin
  var  Action := TActions.Create;
  var  palavrasEncontradas: TList<string>;
  var  Palavra: string;
+ FrmChat.Traduzir := True;
  try
     var GerouAcao := false;
     Atext := AText.replace('(base)','');
@@ -340,15 +347,16 @@ begin
     for Palavra in palavrasEncontradas do
     begin
       GerouAcao := true;
-        if Palavra.Contains(taAbrir.ToString.ToLower) then
+        if Palavra.Contains(taAbrir.ToString.ToLower) or (Palavra.Contains(taOpen.ToString.ToLower) ) then
           Action.FAcao := taAbrir
-        else if Palavra.Contains(taFechar.ToString.ToLower) then
+        else if Palavra.Contains(taFechar.ToString.ToLower) or ( Palavra.Contains(taClose.ToString.ToLower)) then
             Action.FAcao := taFechar
-          else if (Palavra.Contains(taIncluir.ToString.ToLower) or ( Palavra.Contains(taCadastrar.ToString.ToLower))) then
+          else if (Palavra.Contains(taIncluir.ToString.ToLower) or ( Palavra.Contains(taCadastrar.ToString.ToLower)) or ( Palavra.Contains(taAdd.ToString.ToLower))
+                 or ( Palavra.Contains(taRegister.ToString.ToLower))) then
              Action.FAcao := taCadastrar
            else if (Palavra.Contains(taExcluir.ToString.ToLower) or ( Palavra.Contains(taDeletar.ToString.ToLower))) then
                Action.FAcao := taDeletar
-             else if (Palavra.Contains(taEmitir.ToString.ToLower) or ( Palavra.Contains(taGerar.ToString.ToLower))) then
+             else if (Palavra.Contains(taEmitir.ToString.ToLower) or ( Palavra.Contains(taGerar.ToString.ToLower)) or (Palavra.Contains(taGenerate.ToString.ToLower))) then
                Action.FAcao := taEmitir;
 
         if MENU_NF.ToLower.Contains(Palavra) then
@@ -373,37 +381,37 @@ end;
 
 Procedure TActions.ExecutarAcoesMenuCliente;
 begin
-  if (FAcao = taAbrir) and (FMenu = taClientes) then
+  if (FAcao in [taAbrir, taOpen]) and (FMenu = taClientes) then
     AbrirMenuCliente
   else
-  if (FAcao = taFechar) and (FMenu = taClientes) then
+  if (FAcao in [taFechar, taClose]) and (FMenu = taClientes) then
     FecharMenuCliente
   else
-  if (FAcao = taCadastrar) and (FMenu = taClientes) then
+  if (FAcao in [taCadastrar, taRegister, taAdd]) and (FMenu = taClientes) then
      CadastrarNovoCliente;
 end;
 
 Procedure TActions.ExecutarAcoesProdutos;
 begin
-  if (FAcao = taAbrir) and (FMenu = taProduto) then
+  if (FAcao in [taAbrir, taOpen])  and (FMenu = taProduto) then
     AbrirMenuProdutos
   else
-  if (FAcao = taFechar) and (FMenu = taProduto) then
+  if  (FAcao in [taFechar, taClose]) and (FMenu = taProduto) then
     FecharMenuProdutos
   else
-//  if (FAcao = taCadastrar) and (FMenu = taProduto) then // Nao implementado ainda
+//  if (FAcao = taCadastrar) and (FMenu = taProduto) then // Not implemented
 //     CadastrarNovoProduto;
 end;
 
 Procedure TActions.ExecutarAcoesMenuNotaFiscal;
 begin
-  if (FAcao = taAbrir) and (FMenu = taNFe) then
+  if  (FAcao in [taAbrir, taOpen]) and (FMenu = taNFe) then
     AbrirMenuNF
   else
-  if (FAcao = taFechar) and (FMenu = taNFe) then
+  if (FAcao in [taFechar, taClose]) and (FMenu = taNFe) then
     FecharMenuNF
   else
-  if (FAcao = taEmitir) and (FMenu = taNFe) then
+  if (FAcao in [taEmitir,  taRegister, taAdd]) and (FMenu in [taNFe, taInvoice]) then
      EmitirUmaNotaFisacal;
 end;
 
@@ -437,8 +445,9 @@ function TActionsMenusHelper.ToString: string;
 begin
   case self of
     taNFe: Result := 'Nota Fiscal';
-    taProduto: Result := 'Produto';
-    taClientes: Result := 'Clientes' ;
+    taProduto: Result := 'Produ';
+    taClientes: Result := 'Client';
+    taInvoice: Result := 'Invoice';
   end;
 end;
 
@@ -457,6 +466,14 @@ begin
     taExcluir:   Result := 'Exclu';
     taDeletar:   Result := 'Delet';
     taGerar  :   Result := 'Gera';
+    taOpen:      Result := 'Open';
+    taClose:     Result := 'Close';
+    taGenerate:  Result := 'Generate';
+    taEdit:      Result := 'Edit';
+    taRegister:  Result := 'Register';
+    taInclude:   Result := 'Include';
+    taDelete:    Result := 'Delete';
+    taAdd:       Result := 'Add';
   end;
 end;
 
