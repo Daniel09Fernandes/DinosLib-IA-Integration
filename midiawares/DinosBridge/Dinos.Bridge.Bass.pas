@@ -41,6 +41,7 @@ uses Bass, System.Classes;
     MIC_MUTE            = 4294967296;
     MIN_FREQ_OF_SILENCE = 11171220;
     STEP_SILENCE_MAX    = 3;
+    MIC_DEVICE = 0;
 
 Type
   WAVHDR = packed record
@@ -129,13 +130,13 @@ begin
   FWaveStream := TMemoryStream.Create;
   gWaveStream := FWaveStream;
 
-  if (not BASS_RecordInit(0)) or (not BASS_Init(1, 44100, 0, Application.Handle, Nil)) then
+  if (not BASS_RecordInit(MIC_DEVICE)) or (not BASS_Init(1, 44100, 0, Application.Handle, Nil)) then
   begin
     ShowMessage('Não foi possível iniciar o dispositivo');
     Exit;
   end;
 
-  BASS_RecordInit(0);
+  BASS_RecordInit(MIC_DEVICE);
 end;
 
 //Singleton

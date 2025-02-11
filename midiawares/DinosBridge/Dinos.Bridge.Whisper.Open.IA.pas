@@ -52,6 +52,7 @@ type
       TEMP_05        = '--temperature 0.5 ';
       BEAM_SIZE_1    = ' --beam_size 1 ';
       LANGUAGE_PT_BR = ' --language Portuguese ';
+      LANGUAGE_EN    = ' --language English ';
     function RunCommandAndGetOutput(const Command: string): string;
     var
       FCommandShell: String;
@@ -75,13 +76,14 @@ begin
                    MODEL_BASE     +
                    FPS_16         +
                    TEMP_05        +
-                 //  BEAM_SIZE_1    +
-                   LANGUAGE_PT_BR +'"';
+                 //BEAM_SIZE_1    +
+                 //LANGUAGE_PT_BR +'"'; // to Brazilian, descomented this line and comment the LANGUAGE_EN
+                   LANGUAGE_EN +'"';
 end;
 
 function TDinosWhisper.GetTextFromWav: string;
 begin
- Result := RunCommandAndGetOutput(FCommandShell);
+  Result := RunCommandAndGetOutput(FCommandShell);
 end;
 
 function TDinosWhisper.RunCommandAndGetOutput(const Command: string): string;
