@@ -23,76 +23,150 @@ SOFTWARE.}
 
 { Delphi openOffice Library }
 
-{ File     : Dinos.Bridge.Whisper.OpenIA.pas }
+{ File     : Dinos.Bridge.Whisper.Open.IA.pas}
 { Developer: Daniel Fernandes Rodrigures }
 { Email    : danielfernandesroddrigues@gmail.com }
 { Instagram: @DinosDev }
 { this unit is a part of the Open Source. }
 { licensed under a MIT - see LICENSE.md}
-
 { ******************************************************* }
+{
+    Modelos disponíveis no Whisper
+    Nome do modelo	Tamanho (MB)	Requisitos de GPU	    Velocidade	    Precisão
+    tiny             	~39 MB           	Muito leve	     Muito rápida	  Baixa
+    base             	~74 MB	          Leve	           Rápida	        Boa
+    small            	~244 MB	          Moderada	       Média	        Melhor
+    medium           	~769 MB	          Alta	           Mais lenta	    Muito boa
+    large            	~1550 MB         	Alta	           Mais lenta	    Excelente
+}
 
 unit Dinos.Bridge.Whisper.Open.IA;
 
 interface
+
 uses
- sysUtils, strUtils;
+  SysUtils, StrUtils, Classes, Winapi.Windows;
 
 type
+  TWhisperLanguage = (wlAuto, wlPortuguese, wlEnglish, wlSpanish);
+  TWhisperDevice = (wdCPU, wdVRAM_CUDA);
+  TWhisperModel = (wmTiny, wmBase, wmSmall, wmMedium, wmLarge);
+
+  TWhisperModelHelper = record helper for TWhisperModel
+    function ToString: string;
+  end;
+
+  TWhisperDevicelHelper = record helper for TWhisperDevice
+    function ToString: string;
+  end;
+
   TDinosWhisper = class
-    private
-    const
-      PATH_ANACONDA  = 'D:\Users\daniel\anaconda3';  // Anaconda intalled loacation
-      POWERSHELL     = '%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -NoExit -Command ';
-      CALL_ANACONDA  = '"& '''+PATH_ANACONDA+'\shell\condabin\conda-hook.ps1'' ; conda activate '''+PATH_ANACONDA+''';';
-      WHISPER        = ' whisper [PATH_WAV]  ';
-      MODEL_TYNY     = ' --model tiny '; // for performace use tyny BUT is not good model
-      MODEL_BASE     = ' --model base '; // for performace use base, i think, bette than tyny
-      FPS_16         = ' --fp16 False ';
-      TEMP_05        = '--temperature 0.5 ';
-      BEAM_SIZE_1    = ' --beam_size 1 ';
-      LANGUAGE_PT_BR = ' --language Portuguese ';
-    function RunCommandAndGetOutput(const Command: string): string;
-    var
-      FCommandShell: String;
-    public
-     function GetTextFromWav:string;
-     constructor Create(APathWaveFile: String);
+  private
+  var
+    FPathConda: string;
+    FEnvironment: string;
+    FAudioFilePath: string;
+    FLanguage: TWhisperLanguage;
+    FModel: TWhisperModel;
+    FDevice: TWhisperDevice;
+    FFp16: string;
+    FUseFp16: Boolean;
+
+    procedure SetUseFp16(const Value: Boolean);
+    function GetLanguageParam: string;
+    function SanitizePath(const Path: string): string;
+    function BuildWhisperCommand: string;
+    function RunCommand(const Command: string): string;
+  public
+    constructor Create(const AAudioFilePath: string);
+
+    function Execute: string;
+
+    // Propriedades
+    property CondaPath: string read FPathConda write FPathConda;
+    property Environment: string read FEnvironment write FEnvironment;
+    property Language: TWhisperLanguage read FLanguage write FLanguage
+      default wlPortuguese;
+    property Model: TWhisperModel read FModel write FModel;
+    property Device: TWhisperDevice read FDevice write FDevice;
+    property UseFp16: Boolean read FUseFp16 write SetUseFp16;
   end;
 
 implementation
 
-uses
-  Winapi.Windows;
-
 { TDinosWhisper }
 
-constructor TDinosWhisper.Create(APathWaveFile: String);
+constructor TDinosWhisper.Create(const AAudioFilePath: string);
 begin
-  FCommandShell := POWERSHELL +
-                   CALL_ANACONDA +
-                   WHISPER.Replace('[PATH_WAV]',APathWaveFile)+
-                   MODEL_BASE     +
-                   FPS_16         +
-                   TEMP_05        +
-                 //  BEAM_SIZE_1    +
-                   LANGUAGE_PT_BR +'"';
+  inherited Create;
+  FAudioFilePath := AAudioFilePath;
+  FLanguage := wlPortuguese;
+  FModel := wmBase;
+  FDevice := wdCPU;
 end;
 
-function TDinosWhisper.GetTextFromWav: string;
+function TDinosWhisper.GetLanguageParam: string;
 begin
- Result := RunCommandAndGetOutput(FCommandShell);
+  case FLanguage of
+    wlPortuguese:
+      Result := ' --language Portuguese';
+    wlEnglish:
+      Result := ' --language English';
+    wlSpanish:
+      Result := ' --language Spanish';
+  else
+    Result := '';
+  end;
 end;
 
-function TDinosWhisper.RunCommandAndGetOutput(const Command: string): string;
+function TDinosWhisper.SanitizePath(const Path: string): string;
+begin
+  Result := '"' + Path.Trim + '"';
+end;
+
+procedure TDinosWhisper.SetUseFp16(const Value: Boolean);
+begin
+  FUseFp16 := Value;
+
+  if FUseFp16 then
+    FFp16 := ' --fp16 True'
+  else
+    FFp16 := ' --fp16 False';
+end;
+
+function TDinosWhisper.BuildWhisperCommand: string;
+var
+  lCondaHookPath: string;
+  lEnv: string;
+begin
+  if FPathConda.Trim.IsEmpty then
+    raise Exception.Create
+      ('Conda path is required. Typically: C:\Users\YourUser\anaconda3');
+
+  lCondaHookPath := IncludeTrailingPathDelimiter(FPathConda) +
+    'shell\condabin\conda-hook.ps1';
+  lEnv := IfThen(FEnvironment.Trim.IsEmpty, 'base', FEnvironment);
+
+  if FDevice = wdCPU then
+    FUseFp16 := False; // Only VRAM use
+
+  Result := Format
+    ('powershell.exe -ExecutionPolicy Bypass -NoLogo -NoProfile -Command "& ''%s'';'
+    + ' conda activate %s; whisper ''%s'' --model %s --device %s%s %s "',
+    [lCondaHookPath, lEnv, FAudioFilePath, FModel.ToString, FDevice.ToString,
+    GetLanguageParam, FFp16]);
+end;
+
+function TDinosWhisper.RunCommand(const Command: string): string;
 var
   SecurityAttributes: TSecurityAttributes;
   StartupInfo: TStartupInfo;
   ProcessInfo: TProcessInformation;
   StdOutPipeRead, StdOutPipeWrite: THandle;
-  Buffer: array[0..255] of AnsiChar;
+  Buffer: array [0 .. 255] of AnsiChar;
   BytesRead: DWORD;
   Output: string;
+  CmdLine: string;
 begin
   Result := '';
   SecurityAttributes.nLength := SizeOf(SecurityAttributes);
@@ -100,32 +174,72 @@ begin
   SecurityAttributes.lpSecurityDescriptor := nil;
 
   if CreatePipe(StdOutPipeRead, StdOutPipeWrite, @SecurityAttributes, 0) then
-  try
-    ZeroMemory(@StartupInfo, SizeOf(StartupInfo));
-    StartupInfo.cb := SizeOf(StartupInfo);
-    StartupInfo.hStdOutput := StdOutPipeWrite;
-    StartupInfo.hStdError := StdOutPipeWrite;
-    StartupInfo.dwFlags := STARTF_USESTDHANDLES or STARTF_USESHOWWINDOW;
-    StartupInfo.wShowWindow := SW_HIDE;
-
-    if CreateProcess(nil, PChar('cmd.exe /C ' + Command), nil, nil, TRUE, 0, nil, nil, StartupInfo, ProcessInfo) then
     try
-      CloseHandle(StdOutPipeWrite);
-      while ReadFile(StdOutPipeRead, Buffer, SizeOf(Buffer) - 1, BytesRead, nil) do
-      begin
-        Buffer[BytesRead] := #0;
-        Output := Output + string(Buffer);
-        if pos('(base)',Output) > 0 then Break;
-      end;
-      WaitForSingleObject(ProcessInfo.hProcess, 50);
-      Result := Output;
+      ZeroMemory(@StartupInfo, SizeOf(StartupInfo));
+      StartupInfo.cb := SizeOf(StartupInfo);
+      StartupInfo.hStdOutput := StdOutPipeWrite;
+      StartupInfo.hStdError := StdOutPipeWrite;
+      StartupInfo.dwFlags := STARTF_USESTDHANDLES or STARTF_USESHOWWINDOW;
+      StartupInfo.wShowWindow := SW_HIDE;
+
+      // Executa powershell.exe direto, passando só os parâmetros para o comando
+      CmdLine := Command; // Command já inicia com "powershell.exe ..."
+
+      if CreateProcess(nil, PChar(CmdLine), nil, nil, TRUE, 0, nil, nil,
+        StartupInfo, ProcessInfo) then
+        try
+          CloseHandle(StdOutPipeWrite);
+          while ReadFile(StdOutPipeRead, Buffer, SizeOf(Buffer) - 1, BytesRead,
+            nil) and (BytesRead > 0) do
+          begin
+            Buffer[BytesRead] := #0;
+            Output := Output + string(Buffer);
+          end;
+          WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+          Result := Output;
+        finally
+          CloseHandle(ProcessInfo.hProcess);
+          CloseHandle(ProcessInfo.hThread);
+        end;
     finally
-      CloseHandle(ProcessInfo.hProcess);
-      CloseHandle(ProcessInfo.hThread);
+      CloseHandle(StdOutPipeRead);
     end;
-  finally
-    CloseHandle(StdOutPipeRead);
+end;
+
+function TDinosWhisper.Execute: string;
+begin
+  if not FileExists(FAudioFilePath) then
+    raise Exception.CreateFmt('Audio file not found: %s', [FAudioFilePath]);
+
+  Result := RunCommand(BuildWhisperCommand);
+end;
+
+{ TWhisperModelHelper }
+
+function TWhisperModelHelper.ToString: string;
+begin
+  case self of
+    wmTiny:
+      Result := 'tiny';
+    wmBase:
+      Result := 'base';
+    wmSmall:
+      Result := 'small';
+    wmMedium:
+      Result := 'medium';
+    wmLarge:
+      Result := 'large';
   end;
+end;
+
+{ TWhisperDevicelHelper }
+
+function TWhisperDevicelHelper.ToString: string;
+begin
+ case self of
+   wdCPU: Result := 'cpu';
+   wdVRAM_CUDA: Result := 'cuda';
+ end;
 end;
 
 end.

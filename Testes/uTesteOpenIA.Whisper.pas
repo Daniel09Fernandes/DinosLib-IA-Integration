@@ -41,14 +41,22 @@ implementation
 
 procedure TForm2.Button1Click(Sender: TObject);
 const
-  TesteAudio = 'D:\Fontes\PalestraIA\ProjetoTeste\Win32\Debug\teste.wav';
+  TesteAudio = 'C:\teste\Teste.mp4';
 begin
   Memo1.Lines.Clear;
-  var DinosWhisper := TDinosWhisper.Create(DinosMic.PathSaveFile);
+
+  var Whisper := TDinosWhisper.Create(TesteAudio);
   try
-    Memo1.Lines.Text := DinosWhisper.GetTextFromWav;
+    Whisper.CondaPath := 'C:\Users\danie\anaconda3';  //My conda installed
+    Whisper.Environment := 'whisper_env'; //create on conda **conda activate whisper_env
+    Whisper.Language := wlPortuguese;
+    Whisper.Model := wmSmall;
+    Whisper.Device := wdVRAM_CUDA;
+
+    var Transcription := Whisper.Execute;
+    Memo1.Lines.Text := Transcription;
   finally
-    DinosWhisper.Free;
+    Whisper.Free;
   end;
 end;
 
@@ -92,10 +100,10 @@ procedure TForm2.Timer1Timer(Sender: TObject);
 var
   level: Single;
 begin
-   DinosMic.PauseForSilence;
-
-   if DinosMic.FreqMic > 0 then
-     Memo2.Lines.Add(DinosMic.FreqMic.ToString);
+//   DinosMic.PauseForSilence;
+//
+//   if DinosMic.FreqMic > 0 then
+//     Memo2.Lines.Add(DinosMic.FreqMic.ToString);
 end;
 
 

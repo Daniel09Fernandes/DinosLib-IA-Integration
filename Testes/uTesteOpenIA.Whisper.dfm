@@ -12,6 +12,9 @@ object Form2: TForm2
   Font.Style = []
   OnClose = FormClose
   OnCreate = FormCreate
+  DesignSize = (
+    389
+    441)
   TextHeight = 15
   object Button1: TButton
     Left = 3
@@ -27,8 +30,10 @@ object Form2: TForm2
     Top = 8
     Width = 268
     Height = 385
+    Anchors = [akLeft, akTop, akRight]
     Lines.Strings = (
       'Memo1')
+    ScrollBars = ssBoth
     TabOrder = 1
   end
   object Button2: TButton
@@ -54,6 +59,7 @@ object Form2: TForm2
     Top = 8
     Width = 97
     Height = 385
+    Anchors = [akTop, akRight]
     Lines.Strings = (
       'Memo1')
     TabOrder = 4
