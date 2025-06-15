@@ -93,6 +93,8 @@ Type
     function  PlaySong(AFile : String): TDinosMediaPlayer;
     function  PauseForSilence(): TDinosMediaPlayer;
     function  FreeSongOfMemory: TDinosMediaPlayer;
+    function  StopSong(): TDinosMediaPlayer;
+    function  SongIsFinished: Boolean;
 
     class function GetInstance: TDinosMediaPlayer;
     class function FreeInstance: TDinosMediaPlayer;
@@ -220,6 +222,12 @@ begin
   Result := self;
 end;
 
+function TDinosMediaPlayer.StopSong(): TDinosMediaPlayer;
+begin
+  BASS_ChannelStop(FSong);
+  Result := self;
+end;
+
 procedure TDinosMediaPlayer.SetGenerateHeaderForWavFile;
 begin
   with FWaveHdr do
@@ -249,6 +257,19 @@ procedure TDinosMediaPlayer.SetWaveStream(const Value: TMemoryStream);
 begin
   FWaveStream := Value;
   gWaveStream := FWaveStream;
+end;
+
+function TDinosMediaPlayer.SongIsFinished: Boolean;
+begin
+  // Verifica o estado do canal
+  case BASS_ChannelIsActive(FSong) of
+    BASS_ACTIVE_STOPPED:
+      Result := True; // O áudio terminou de tocar
+    BASS_ACTIVE_PAUSED, BASS_ACTIVE_PLAYING:
+      Result := False; // Ainda está tocando ou pausado
+    else
+      Result := True; // Em caso de erro, considera como terminado
+  end;
 end;
 
 function TDinosMediaPlayer.StartRecord: TDinosMediaPlayer;

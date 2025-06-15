@@ -42,7 +42,7 @@ uses
   OpenAI.Chat;
 
 type
-  TypeGPTVoice = (tvOnyx, tvAlloy, tvEcho, tvFable, tvNova, tvShimmer);
+  TypeGPTVoice = (tvOnyx, tvAlloy, tvEcho, tvFable, tvNova, tvShimmer, tvSage, tvCoral, tvAsh);
 
   TypeGPTVoiceHelper = record helper for TypeGPTVoice
     function ToString: string;
@@ -126,6 +126,7 @@ end;
 
 function TypeGPTVoiceHelper.ToString: string;
 begin
+  //her voice https://community.openai.com/t/oct-31-new-voices-on-chat-completions-to-replace-others-up/998717
    case Self of
     tvOnyx: Result := 'onyx';
     tvAlloy: Result := 'alloy';
@@ -133,6 +134,9 @@ begin
     tvFable: Result := 'fable';
     tvNova: Result := 'nova';
     tvShimmer: Result := 'shimmer';
+    tvSage: Result := 'sage';
+    tvCoral: Result := 'coral';
+    tvAsh: Result := 'ash';
   else
     Result := 'onyx';
   end;

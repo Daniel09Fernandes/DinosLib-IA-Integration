@@ -100,7 +100,7 @@ begin
   if not DirectoryExists(Path) then
     ForceDirectories(Path);
 
-  TDinosMediaPlayer.GetInstance.PathSaveFile :=Path+'\Interactions.wav';
+  TDinosMediaPlayer.GetInstance.PathSaveFile :=Path+'\Interactions.mp3';
   FInteragirComGPTAoSilenciar := true;
 end;
 
