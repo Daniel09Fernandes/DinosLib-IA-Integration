@@ -243,21 +243,32 @@ begin
   FrmChat.imgRecClick(nil);
   Application.ProcessMessages;
   var ThreadFinished := false;
+  FrmChat.SetControlOtherClass := True;
+
+  while FrmChat.imgStopRec.Visible do
+     Application.ProcessMessages;
+
+
   TThread.CreateAnonymousThread(
                              procedure
                              begin
-                                TDinosMediaPlayer.GetInstance.PauseForSilence;
-                                while TDinosMediaPlayer.GetInstance.FreqMic <> 0 do
-                                begin
-                                  TDinosMediaPlayer.GetInstance.PauseForSilence; //Atualiza a Frequencia
-                                end;
+                               TThread.NameThreadForDebugging('Acao');
+                                TThread.CurrentThread.FreeOnTerminate := True;
+                                TDinosMediaPlayer.GetInstance.StopRecord;
+                                TDinosMediaPlayer.GetInstance.FreeSongOfMemory;
 
-                                var DinosWhisper := TDinosWhisper.Create(TDinosMediaPlayer.GetInstance.PathSaveFile);
                                 var resp := '';
+                                var Whisper := TDinosWhisper.Create(TDinosMediaPlayer.GetInstance.PathSaveFile);
                                 try
-                                  resp := DinosWhisper.GetTextFromWav;
+                                   Whisper.CondaPath := 'D:\Users\daniel\anaconda3';  //My conda installed
+                                   Whisper.Environment := 'p_whisper_env'; //create on conda **conda activate whisper_env
+                                   Whisper.Language := wlEnglish;
+                                   Whisper.Model := wmBase;
+                                   Whisper.Device := wdCPU;
+
+                                   resp := Whisper.Execute;
                                 finally
-                                  DinosWhisper.Free;
+                                   Whisper.Free;
                                 end;
 
                                 TThread.Synchronize(nil, procedure
@@ -265,6 +276,7 @@ begin
                                     FrmChat.ControleVisibilidadeMicGravando(false);
                                     AProc(resp);
                                     ThreadFinished := true;
+                                    FrmChat.SetControlOtherClass := False;
                                 end);
                              end).Start;
    while not ThreadFinished do
@@ -276,11 +288,12 @@ end;
 
 function TActions.TratarValor(AValor: string; ADataType: TFieldType = ftString):string;
 begin
-  Result := Copy(
-                  AValor
-                   .Replace('(base)', '')
-                   .Replace(',', '')
-                ,26).trim;
+  AValor := AValor
+               .Replace('(base)', '')
+               .Replace(',', '');
+
+  Result := Copy(AValor, Pos( '[00:00.000' ,AValor)).trim;
+  Result := Copy(AValor, Pos( ']' ,AValor)+1).trim;
 
    if ADataType = ftFloat then
    begin

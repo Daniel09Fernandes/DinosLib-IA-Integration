@@ -2,7 +2,7 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Form2'
-  ClientHeight = 441
+  ClientHeight = 555
   ClientWidth = 389
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,8 +14,29 @@ object Form2: TForm2
   OnCreate = FormCreate
   DesignSize = (
     389
-    441)
+    555)
   TextHeight = 15
+  object LblMic: TLabel
+    Left = 8
+    Top = 448
+    Width = 26
+    Height = 15
+    Caption = 'Mic: '
+  end
+  object Label1: TLabel
+    Left = 8
+    Top = 512
+    Width = 26
+    Height = 15
+    Caption = 'Mic: '
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 487
+    Width = 26
+    Height = 15
+    Caption = 'Freq:'
+  end
   object Button1: TButton
     Left = 3
     Top = 408
@@ -72,6 +93,30 @@ object Form2: TForm2
     Caption = 'Text to Speench'
     TabOrder = 5
     OnClick = Button4Click
+  end
+  object CbMicAvaliable: TComboBox
+    Left = 40
+    Top = 508
+    Width = 145
+    Height = 23
+    TabOrder = 6
+    Text = 'CbMicAvaliable'
+    OnChange = CbMicAvaliableChange
+  end
+  object CbFreq: TComboBox
+    Left = 40
+    Top = 483
+    Width = 145
+    Height = 23
+    ItemIndex = 0
+    TabOrder = 7
+    Text = '44100'
+    OnChange = CbMicAvaliableChange
+    Items.Strings = (
+      '44100'
+      '48000'
+      '22050'
+      '96000')
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

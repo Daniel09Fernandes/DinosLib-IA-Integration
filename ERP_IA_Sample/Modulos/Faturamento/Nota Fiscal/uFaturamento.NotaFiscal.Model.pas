@@ -126,7 +126,7 @@ begin
     FACBrNfe.Configuracoes.Certificados.URLPFX      := Configuracao.URLPFX;
     FACBrNfe.Configuracoes.Certificados.ArquivoPFX  := Configuracao.Caminho;
     FACBrNfe.Configuracoes.Certificados.Senha       := Configuracao.Senha;
-    FACBrNfe.Configuracoes.Certificados.NumeroSerie := 'CF41825BE7AED1253F9DE366205246385470CA55';//FACBrNFe.SSL.SelecionarCertificado;
+    FACBrNfe.Configuracoes.Certificados.NumeroSerie := FACBrNFe.SSL.SelecionarCertificado;
 
     FACBrNfe.DANFE := Configuracao.Report;
     FACBrNfe.SSL.DescarregarCertificado;

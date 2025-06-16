@@ -60,21 +60,29 @@ type
     Panel1: TPanel;
     imgRec: TSkAnimatedImage;
     tmrPausaPorSilencio: TTimer;
+    Panel4: TPanel;
+    Label2: TLabel;
+    CbFreq: TComboBox;
+    CbMicAvaliable: TComboBox;
+    Label1: TLabel;
     procedure mUserKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure imgStopRecClick(Sender: TObject);
     procedure imgRecClick(Sender: TObject);
     procedure tmrPausaPorSilencioTimer(Sender: TObject);
+    procedure CbFreqChange(Sender: TObject);
   private
     { Private declarations }
     FControle : TControle;
     FInteragirComGPTAoSilenciar: boolean;
     FTraduzir: Boolean;
+    FSetControlOtherClass: Boolean;
   public
     procedure GptInteraction(AText: string; APassarTextoDiretoSemInteracaoGPT: boolean = false);
     procedure ControleVisibilidadeMicGravando(AValue: boolean);
     property InteragirComGPTAoSilenciar: Boolean read FInteragirComGPTAoSilenciar write FInteragirComGPTAoSilenciar;
     property Controle: TControle read FControle;
     property Traduzir: Boolean read FTraduzir write FTraduzir;
+    property SetControlOtherClass: Boolean read FSetControlOtherClass write FSetControlOtherClass;
 
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -86,6 +94,13 @@ implementation
 {$R *.dfm}
 uses uChat.Acoes.Controller, math;
 
+procedure TfrmChatIA.CbFreqChange(Sender: TObject);
+begin
+  var lPath :=  TDinosMediaPlayer.GetInstance.PathSaveFile;
+  TDinosMediaPlayer.GetInstance.FreeInstance;
+   TDinosMediaPlayer.GetInstance(CbMicAvaliable.ItemIndex, TSampleRates(CbFreq.ItemIndex)).PathSaveFile := lPath;
+end;
+
 procedure TfrmChatIA.ControleVisibilidadeMicGravando(AValue: boolean);
 begin
   imgRec.Visible := not AValue;
@@ -96,11 +111,16 @@ end;
 constructor TfrmChatIA.Create(AOwner: TComponent);
 begin
   inherited;
+  FSetControlOtherClass := False;
   var Path := GetCurrentDir+'\Interactions';
   if not DirectoryExists(Path) then
     ForceDirectories(Path);
 
-  TDinosMediaPlayer.GetInstance.PathSaveFile :=Path+'\Interactions.mp3';
+  TDinosMediaPlayer.GetInstance(1, sr48000).PathSaveFile :=Path+'\Interactions.wav';
+  CbMicAvaliable.Items := TDinosMediaPlayer.GetInstance.DeviceMicAvaliabe;
+  CbMicAvaliable.ItemIndex := 1;
+  CbFreq.ItemIndex := 1;
+
   FInteragirComGPTAoSilenciar := true;
 end;
 
@@ -142,19 +162,32 @@ procedure TfrmChatIA.imgStopRecClick(Sender: TObject);
 begin
   ControleVisibilidadeMicGravando(false);
   TDinosMediaPlayer.GetInstance.StopRecord;
+  TDinosMediaPlayer.GetInstance.FreeSongOfMemory;
+
+  if FSetControlOtherClass then
+    Exit;
 
   TThread.CreateAnonymousThread( procedure
                                  begin
-                                   var DinosWhisper := TDinosWhisper.Create(TDinosMediaPlayer.GetInstance.PathSaveFile);
+                                   TThread.NameThreadForDebugging('Chat - stop');
+                                   TThread.CurrentThread.FreeOnTerminate := True;
                                    var resp := '';
-                                   try
-                                      resp := DinosWhisper.GetTextFromWav;
-                                   finally
-                                     DinosWhisper.Free;
-                                   end;
 
-                                    TThread.Synchronize(nil, procedure
+                                   var Whisper := TDinosWhisper.Create(TDinosMediaPlayer.GetInstance.PathSaveFile);
+                                   try
+                                      Whisper.CondaPath := 'D:\Users\daniel\anaconda3';  //My conda installed
+                                      Whisper.Environment := 'p_whisper_env'; //create on conda **conda activate whisper_env
+                                      Whisper.Language := wlEnglish;
+                                      Whisper.Model := wmBase;
+                                      Whisper.Device := wdCPU;
+
+                                      resp := Whisper.Execute;
+                                   finally
+                                      Whisper.Free;
+                                   end;
+                                   TThread.Synchronize(nil, procedure
                                                               begin
+                                                                mIA.Lines.Clear;
                                                                 mIA.Lines.Text := 'Comando: '+ resp;
                                                                 TChatController.Acoes(resp);
                                                                 if FInteragirComGPTAoSilenciar then
