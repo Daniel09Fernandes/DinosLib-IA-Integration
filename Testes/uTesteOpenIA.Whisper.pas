@@ -20,6 +20,11 @@ type
     Timer1: TTimer;
     Memo2: TMemo;
     Button4: TButton;
+    LblMic: TLabel;
+    CbMicAvaliable: TComboBox;
+    Label1: TLabel;
+    CbFreq: TComboBox;
+    Label2: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -27,6 +32,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure CbMicAvaliableChange(Sender: TObject);
   private
     DinosMic : TDinosMediaPlayer;
   public
@@ -45,13 +51,13 @@ const
 begin
   Memo1.Lines.Clear;
 
-  var Whisper := TDinosWhisper.Create(TesteAudio);
+  var Whisper := TDinosWhisper.Create(DinosMic.PathSaveFile);
   try
-    Whisper.CondaPath := 'C:\Users\danie\anaconda3';  //My conda installed
+    Whisper.CondaPath := 'D:\Users\daniel\anaconda3';  //My conda installed
     Whisper.Environment := 'whisper_env'; //create on conda **conda activate whisper_env
     Whisper.Language := wlPortuguese;
-    Whisper.Model := wmSmall;
-    Whisper.Device := wdVRAM_CUDA;
+    Whisper.Model := wmBase;
+    Whisper.Device := wdCPU;
 
     var Transcription := Whisper.Execute;
     Memo1.Lines.Text := Transcription;
@@ -86,14 +92,22 @@ begin
   DinosMic.PlaySong(DinosMic.PathSaveFile);
 end;
 
+procedure TForm2.CbMicAvaliableChange(Sender: TObject);
+begin
+  DinosMic.FreeInstance;
+  DinosMic := TDinosMediaPlayer.GetInstance(CbMicAvaliable.ItemIndex, TSampleRates(CbFreq.ItemIndex));
+end;
+
 procedure TForm2.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
- FreeAndNil(DinosMic);
+ DinosMic.FreeInstance;
 end;
 
 procedure TForm2.FormCreate(Sender: TObject);
 begin
   DinosMic := TDinosMediaPlayer.GetInstance;
+  CbMicAvaliable.Items := DinosMic.DeviceMicAvaliabe;
+  CbMicAvaliable.ItemIndex := 0;
 end;
 
 procedure TForm2.Timer1Timer(Sender: TObject);

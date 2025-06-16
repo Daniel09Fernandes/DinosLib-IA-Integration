@@ -2,14 +2,14 @@ object frmChatIA: TfrmChatIA
   Left = 0
   Top = 0
   Width = 243
-  Height = 480
+  Height = 568
   Align = alClient
   TabOrder = 0
   object Panel2: TPanel
     Left = 0
     Top = 0
     Width = 243
-    Height = 480
+    Height = 568
     Align = alClient
     Color = clWhite
     ParentBackground = False
@@ -18,7 +18,7 @@ object frmChatIA: TfrmChatIA
       Left = 1
       Top = 41
       Width = 241
-      Height = 343
+      Height = 361
       Align = alClient
       Lines.Strings = (
         '')
@@ -28,9 +28,9 @@ object frmChatIA: TfrmChatIA
     end
     object Panel3: TPanel
       Left = 1
-      Top = 430
+      Top = 517
       Width = 241
-      Height = 49
+      Height = 50
       Align = alBottom
       Color = clBlack
       ParentBackground = False
@@ -39,7 +39,7 @@ object frmChatIA: TfrmChatIA
         Left = 187
         Top = 1
         Width = 53
-        Height = 47
+        Height = 48
         Align = alRight
         Data = {
           47494638396158025802F41F00FFFFFFFFFFCBFFFF57FFCDFFFFCD98FF9A63B4
@@ -58717,7 +58717,7 @@ object frmChatIA: TfrmChatIA
         Left = 1
         Top = 1
         Width = 48
-        Height = 47
+        Height = 48
         Cursor = crHandPoint
         Align = alLeft
         Visible = False
@@ -58861,10 +58861,12 @@ object frmChatIA: TfrmChatIA
         Left = 49
         Top = 1
         Width = 32
-        Height = 47
+        Height = 48
         Cursor = crHandPoint
         Align = alLeft
         OnClick = imgRecClick
+        ExplicitLeft = 43
+        ExplicitTop = 0
         Data = {
           4749463839617001C001F7FE00D7D3DCD2CED8E4E2E8C9C5D1EFEEF2F6F6F8FE
           FEFEBFB9C8C8C3CFD4CFDBE3E0E7BAB5C4B7B1C1EBE9EEC5C0CDBDB7C6D0CCD7
@@ -66243,7 +66245,7 @@ object frmChatIA: TfrmChatIA
     end
     object mUser: TMemo
       Left = 1
-      Top = 384
+      Top = 402
       Width = 241
       Height = 46
       Align = alBottom
@@ -66267,6 +66269,53 @@ object frmChatIA: TfrmChatIA
       ParentBackground = False
       ParentFont = False
       TabOrder = 3
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 448
+      Width = 241
+      Height = 69
+      Align = alBottom
+      TabOrder = 4
+      object Label2: TLabel
+        Left = 7
+        Top = 13
+        Width = 26
+        Height = 15
+        Caption = 'Freq:'
+      end
+      object Label1: TLabel
+        Left = 7
+        Top = 42
+        Width = 26
+        Height = 15
+        Caption = 'Mic: '
+      end
+      object CbFreq: TComboBox
+        Left = 81
+        Top = 11
+        Width = 145
+        Height = 23
+        Style = csDropDownList
+        ItemIndex = 0
+        TabOrder = 0
+        Text = '44100'
+        OnChange = CbFreqChange
+        Items.Strings = (
+          '44100'
+          '48000'
+          '22050'
+          '96000')
+      end
+      object CbMicAvaliable: TComboBox
+        Left = 81
+        Top = 40
+        Width = 145
+        Height = 23
+        Style = csDropDownList
+        TabOrder = 1
+        OnChange = CbFreqChange
+      end
     end
   end
   object tmrPausaPorSilencio: TTimer
